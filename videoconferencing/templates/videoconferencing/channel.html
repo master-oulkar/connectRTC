@@ -1,0 +1,22 @@
+{% extends 'videoconferencing/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="channel">
+    <nav class="navigation-bar">
+        <a class="navigation-link">username: {{ username }}</a>
+        <a class="navigation-link" href="{% url 'home' %}">home</a>
+        <a class="navigation-link" href="{% url 'signout' %}">logout</a>
+    </nav>
+
+    <div class="channel-container">
+        <h1 class="heading-2">Create Channel</h1>
+        <img class="channel-logo" src="{% static 'videoconferencing/img/icon.png' %}" alt="logo">
+        <input type="text" name="channel-name" id="channel-name" placeholder="Input channel name" class="channel-input"
+            autofocus required />
+        <input type="submit" id="join-btn" class="btn channel-btn" value="Start a Call" />
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'videoconferencing/js/channel.js' %}"></script>
+
+{% endblock content %}

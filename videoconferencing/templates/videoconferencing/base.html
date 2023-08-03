@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <!-- {% load compress %} -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- icon link -->
+        <link rel="shortcut icon" href="{% static 'videoconferencing/img/icon.ico' %}" type="image/x-icon">
+    
+        <!-- custom scss file link -->
+        <link rel="stylesheet"  href="{% static 'videoconferencing/css/style.css'%}" />
+        <!-- {% compress css %}
+        <link rel="stylesheet" type="text/x-scss" href="{% static 'videoconferencing/scss/main.scss'%}" />
+        {% endcompress %} -->
+
+        <!-- font osm link -->
+        <script src="https://kit.fontawesome.com/91f31f2ff1.js" crossorigin="anonymous"></script>
+    
+        <title>Connect with RTC</title>
+    </head>
+    
+<body>
+    {% block content %}
+
+    {% endblock content%}
+</body>
+<!-- login and signup js -->
+<script type="text/javascript" src="{% static 'videoconferencing/js/signup.js' %}"></script>
+
+</html>

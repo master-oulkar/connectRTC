@@ -1,0 +1,102 @@
+.signup{
+    position: relative;
+
+    &__container{
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+        width: 25%;
+        height: 20%;
+
+        @media only screen and (max-width:$bp-largest){
+            width: 35%;
+            height: 30%;
+        }
+
+        @media only screen and (max-width:$bp-large-s){
+            width: 40%;
+            height: 35%;
+        }
+
+        @media only screen and (max-width:$bp-small){
+           width: 45%;
+           height: 40%;
+        }
+    }
+
+    &__form{
+        display: flex;
+        flex-direction: column;
+        row-gap: 3rem;
+        padding-bottom: 3rem;
+    }
+
+    &__input{
+
+        &:not(:last-child) {
+            font-size: 2rem;
+            font-family: inherit;
+            color: inherit;
+            padding:1rem 2.5rem;
+            border-radius: 1rem;
+            background-color: rgba(#fff, .9);
+            border: none;
+            border-bottom: 3px solid transparent;
+            display: block;
+            transition: all 0.2s;
+            box-shadow: 0 1rem 2rem rgba(black, 0.1);
+
+            &:focus{
+                outline: none;
+                box-shadow: 0 2rem 4rem rgba(black, 0.1);
+                border-bottom: 1rem solid green;
+            }
+
+            &:focus:invalid{
+                border-bottom: 1rem solid rgb(255, 102, 0);
+            }
+        }
+        
+
+        @media only screen and (max-width:$bp-largest){
+            font-size: 1.7rem;
+            padding: 1.5rem 3.5rem;
+        }
+
+        @media only screen and (max-width:$bp-large-s){
+            font-size: 1.5rem;
+            padding: 1rem 3rem;
+        }
+
+        @media only screen and (max-width:$bp-small){
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+        }
+
+        // &--btn:hover{
+        //     background-color: rgba(#fff, .5);
+        // }
+
+    }
+
+    &__background {
+        background-image:linear-gradient(to bottom, rgba(#000, 0.2), rgba(#000, 1));
+        opacity: 0.8;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
+}
+
+#correct-password-label{
+    font-size: 1.8rem;
+    color: rgb(96, 167, 96);
+    filter: brightness(60%);
+}
+
+#incorrect-password-label{
+    font-size: 1.8rem;
+    color:rgb(255, 102, 0);
+}

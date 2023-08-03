@@ -1,0 +1,942 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap');
+
+/* line 1, videoconferencing/static/videoconferencing/scss/_base.scss */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+/* line 9, videoconferencing/static/videoconferencing/scss/_base.scss */
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; }
+
+/* line 14, videoconferencing/static/videoconferencing/scss/_base.scss */
+body {
+  font-family: "Nunito", sans-serif;
+  color: #04070aea;
+  font-weight: 300;
+  line-height: 1.6;
+  background-color: #f9f7f6; }
+
+/* line 22, videoconferencing/static/videoconferencing/scss/_base.scss */
+.container {
+  background-color: aliceblue;
+  display: grid;
+  grid-template-rows: 100vh repeat(3, minmax(30rem, min-content)) max-content; }
+  @media only screen and (max-width: 62.5em) {
+    /* line 22, videoconferencing/static/videoconferencing/scss/_base.scss */
+    .container {
+      grid-template-rows: 90vh repeat(3, minmax(30rem, min-content)) max-content; } }
+  @media only screen and (max-width: 50em) {
+    /* line 22, videoconferencing/static/videoconferencing/scss/_base.scss */
+    .container {
+      grid-template-rows: 80vh repeat(3, minmax(30rem, min-content)) max-content; } }
+/* line 38, videoconferencing/static/videoconferencing/scss/_base.scss */
+#signup,
+#login {
+  display: none; }
+
+/* line 43, videoconferencing/static/videoconferencing/scss/_base.scss */
+#correct-password-label,
+#incorrect-password-label {
+  display: none; }
+
+/* line 1, videoconferencing/static/videoconferencing/scss/_footer.scss */
+.footer {
+  background-color: #aaa;
+  font-size: 2rem;
+  padding: 5rem;
+  padding-top: 10rem;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 5rem;
+  justify-content: center;
+  align-items: center;
+  align-content: center; }
+  @media only screen and (max-width: 50em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_footer.scss */
+    .footer {
+      padding: 3rem;
+      padding-top: 7rem;
+      gap: 1rem; } }
+  /* line 21, videoconferencing/static/videoconferencing/scss/_footer.scss */
+  .footer__content {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(max-content, 1fr));
+    gap: 10rem;
+    column-gap: 20rem; }
+    @media only screen and (max-width: 37.5em) {
+      /* line 21, videoconferencing/static/videoconferencing/scss/_footer.scss */
+      .footer__content {
+        grid-template-columns: max-content max-content;
+        grid-template-rows: repeat(2, max-content);
+        gap: 5rem;
+        column-gap: 10rem; } }
+  /* line 35, videoconferencing/static/videoconferencing/scss/_footer.scss */
+  .footer__features--list, .footer__support--list, .footer__legal--list {
+    padding-top: 1rem;
+    list-style: none; }
+    /* line 41, videoconferencing/static/videoconferencing/scss/_footer.scss */
+    .footer__features--list a, .footer__support--list a, .footer__legal--list a {
+      text-decoration: none;
+      color: #04070aea;
+      transition: all .5s; }
+      /* line 46, videoconferencing/static/videoconferencing/scss/_footer.scss */
+      .footer__features--list a:hover, .footer__features--list a:active, .footer__support--list a:hover, .footer__support--list a:active, .footer__legal--list a:hover, .footer__legal--list a:active {
+        color: #f9f7f6; }
+  /* line 53, videoconferencing/static/videoconferencing/scss/_footer.scss */
+  .footer__copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem; }
+  /* line 60, videoconferencing/static/videoconferencing/scss/_footer.scss */
+  .footer svg {
+    height: 3rem;
+    width: 3rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    fill: #04070aea;
+    transition: all 0.5s; }
+    /* line 68, videoconferencing/static/videoconferencing/scss/_footer.scss */
+    .footer svg:hover {
+      fill: #f9f7f6; }
+
+/* line 1, videoconferencing/static/videoconferencing/scss/_header.scss */
+.header {
+  position: relative; }
+  /* line 5, videoconferencing/static/videoconferencing/scss/_header.scss */
+  .header__content {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 95vw;
+    grid-template-rows: 1fr 5rem 25rem 1fr;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center; }
+    @media only screen and (max-width: 50em) {
+      /* line 5, videoconferencing/static/videoconferencing/scss/_header.scss */
+      .header__content {
+        grid-template-columns: 80vw; } }
+    @media only screen and (max-width: 37.5em) {
+      /* line 5, videoconferencing/static/videoconferencing/scss/_header.scss */
+      .header__content {
+        grid-template-rows: 1fr 25rem 1fr; } }
+  /* line 29, videoconferencing/static/videoconferencing/scss/_header.scss */
+  .header img {
+    margin-left: 8rem;
+    margin-top: 8rem;
+    height: 5rem;
+    width: 5rem;
+    justify-self: start;
+    opacity: 1;
+    transition: all 0.8s; }
+    /* line 38, videoconferencing/static/videoconferencing/scss/_header.scss */
+    .header img:hover {
+      opacity: 0.7;
+      transform: translateY(-1rem); }
+    @media only screen and (max-width: 62.5em) {
+      /* line 29, videoconferencing/static/videoconferencing/scss/_header.scss */
+      .header img {
+        margin-left: 5rem;
+        margin-top: 8rem; } }
+    @media only screen and (max-width: 50em) {
+      /* line 29, videoconferencing/static/videoconferencing/scss/_header.scss */
+      .header img {
+        margin-left: 1rem;
+        margin-top: 1rem; } }
+    @media only screen and (max-width: 37.5em) {
+      /* line 29, videoconferencing/static/videoconferencing/scss/_header.scss */
+      .header img {
+        margin-left: 0.4rem;
+        margin-top: 0.4rem;
+        align-self: self-end; } }
+  /* line 58, videoconferencing/static/videoconferencing/scss/_header.scss */
+  .header__gradient {
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 5; }
+  /* line 70, videoconferencing/static/videoconferencing/scss/_header.scss */
+  .header__bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-position: center; }
+
+/* line 81, videoconferencing/static/videoconferencing/scss/_header.scss */
+.button-container {
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem; }
+  /* line 87, videoconferencing/static/videoconferencing/scss/_header.scss */
+  .button-container--sub {
+    display: flex;
+    column-gap: 3rem; }
+    @media only screen and (max-width: 37.5em) {
+      /* line 87, videoconferencing/static/videoconferencing/scss/_header.scss */
+      .button-container--sub {
+        flex-direction: column;
+        row-gap: 3rem; } }
+/* line 98, videoconferencing/static/videoconferencing/scss/_header.scss */
+#error-massage {
+  font-size: 1.5rem;
+  color: rgba(250, 207, 207, 0.984); }
+
+/* line 1, videoconferencing/static/videoconferencing/scss/_content.scss */
+.content {
+  background-color: #f9f7f6;
+  padding: 5rem 20rem;
+  font-size: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, minmax(20rem, mix-content));
+  gap: 8rem;
+  justify-content: center;
+  align-content: center;
+  align-items: center; }
+  /* line 15, videoconferencing/static/videoconferencing/scss/_content.scss */
+  .content__img {
+    width: 100%;
+    border-radius: 2rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5); }
+  /* line 26, videoconferencing/static/videoconferencing/scss/_content.scss */
+  .content__details {
+    padding: 5rem;
+    padding-top: 2rem; }
+    @media only screen and (max-width: 56.26em) {
+      /* line 30, videoconferencing/static/videoconferencing/scss/_content.scss */
+      .content__details--shiftcontent {
+        grid-row: 3 / 4; } }
+  /* line 38, videoconferencing/static/videoconferencing/scss/_content.scss */
+  .content__p {
+    font-size: 2.2rem;
+    text-align: justify; }
+    @media only screen and (max-width: 75em) {
+      /* line 38, videoconferencing/static/videoconferencing/scss/_content.scss */
+      .content__p {
+        font-size: 2rem; } }
+    @media only screen and (max-width: 50em) {
+      /* line 38, videoconferencing/static/videoconferencing/scss/_content.scss */
+      .content__p {
+        font-size: 1.8rem; } }
+    @media only screen and (max-width: 37.5em) {
+      /* line 38, videoconferencing/static/videoconferencing/scss/_content.scss */
+      .content__p {
+        font-size: 1.3rem; } }
+  @media only screen and (max-width: 75em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_content.scss */
+    .content {
+      gap: 5rem;
+      padding-left: 5rem;
+      padding-right: 5rem; } }
+  @media only screen and (max-width: 62.5em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_content.scss */
+    .content {
+      gap: 2rem; } }
+  @media only screen and (max-width: 56.26em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_content.scss */
+    .content {
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(6, minmax(15rem, max-content));
+      gap: 1rem; } }
+  @media only screen and (max-width: 50em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_content.scss */
+    .content {
+      padding-left: 2rem;
+      padding-right: 2rem; } }
+/* line 1, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
+.getstarted {
+  background-color: #aaa;
+  padding: 5rem 20rem;
+  font-size: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  row-gap: 3rem; }
+  /* line 14, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
+  .getstarted__p {
+    font-size: 2.2rem;
+    padding-left: 10rem;
+    padding-right: 10rem; }
+  /* line 20, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
+  .getstarted__buttons {
+    display: flex;
+    column-gap: 3rem; }
+    @media only screen and (max-width: 37.5em) {
+      /* line 20, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
+      .getstarted__buttons {
+        flex-direction: column;
+        row-gap: 3rem; } }
+  @media only screen and (max-width: 75em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
+    .getstarted {
+      padding-left: 5rem;
+      padding-right: 5rem; } }
+  @media only screen and (max-width: 50em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
+    .getstarted {
+      padding-left: 2rem;
+      padding-right: 2rem; }
+      /* line 39, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
+      .getstarted p {
+        padding-left: 5rem;
+        padding-right: 5rem; } }
+/* line 1, videoconferencing/static/videoconferencing/scss/_queries.scss */
+.queries {
+  background-color: #f9f7f6;
+  padding-bottom: 3rem;
+  padding-top: 0rem;
+  padding-left: 20rem;
+  padding-right: 20rem;
+  display: grid;
+  grid-template-rows: min-content min-content;
+  row-gap: 2rem;
+  justify-content: center;
+  align-content: center; }
+  @media only screen and (max-width: 75em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_queries.scss */
+    .queries {
+      padding-left: 5rem;
+      padding-right: 5rem; } }
+  @media only screen and (max-width: 50em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_queries.scss */
+    .queries {
+      padding: 5rem; }
+      /* line 22, videoconferencing/static/videoconferencing/scss/_queries.scss */
+      .queries .heading-3 {
+        text-align: center; } }
+  /* line 27, videoconferencing/static/videoconferencing/scss/_queries.scss */
+  .queries__list {
+    font-size: 1.75rem;
+    font-weight: 500;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(min-content, max-content));
+    column-gap: 4rem; }
+    @media only screen and (max-width: 50em) {
+      /* line 27, videoconferencing/static/videoconferencing/scss/_queries.scss */
+      .queries__list {
+        grid-template-columns: auto;
+        grid-template-rows: repeat(3, minmax(min-content, max-content));
+        row-gap: 3rem; } }
+  /* line 41, videoconferencing/static/videoconferencing/scss/_queries.scss */
+  .queries__list-ans {
+    font-size: 1.5rem;
+    text-align: justify; }
+    @media only screen and (max-width: 50em) {
+      /* line 41, videoconferencing/static/videoconferencing/scss/_queries.scss */
+      .queries__list-ans {
+        font-size: 2rem; } }
+    @media only screen and (max-width: 37.5em) {
+      /* line 41, videoconferencing/static/videoconferencing/scss/_queries.scss */
+      .queries__list-ans {
+        font-size: 1.5rem; } }
+/* line 1, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+.heading-5 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase; }
+
+/* line 8, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+.heading-4 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 2rem;
+  font-weight: 600; }
+
+/* line 14, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+.heading-3 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-transform: uppercase; }
+
+/* line 21, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+.heading-2 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  padding-bottom: 2rem; }
+  @media only screen and (max-width: 75em) {
+    /* line 21, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+    .heading-2 {
+      font-size: 3rem; } }
+/* line 32, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+.heading-1 {
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 5rem;
+  font-weight: 700;
+  color: #f9f7f6;
+  opacity: 0.4;
+  transition: all 0.8s; }
+  /* line 40, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+  .heading-1:hover {
+    opacity: 0.7;
+    transform: translateY(-1rem); }
+  @media only screen and (max-width: 50em) {
+    /* line 32, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+    .heading-1 {
+      font-size: 4rem; } }
+  @media only screen and (max-width: 37.5em) {
+    /* line 32, videoconferencing/static/videoconferencing/scss/_fontheading.scss */
+    .heading-1 {
+      font-size: 3rem; } }
+/* line 1, videoconferencing/static/videoconferencing/scss/_button.scss */
+.btn {
+  background-color: #f9f7f6;
+  text-transform: uppercase;
+  padding: 1.5rem 4rem;
+  display: block;
+  border-radius: 10rem;
+  transition: all 0.8s;
+  font-size: 2.2rem;
+  opacity: 0.4;
+  border: none;
+  cursor: pointer; }
+  /* line 15, videoconferencing/static/videoconferencing/scss/_button.scss */
+  .btn:hover {
+    background-color: #aaa;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.5rem);
+    opacity: 0.8; }
+  @media only screen and (max-width: 37.5em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_button.scss */
+    .btn {
+      font-size: 2rem;
+      pad: 1rem 2rem; } }
+/* line 28, videoconferencing/static/videoconferencing/scss/_button.scss */
+.forget-btn {
+  background-color: #f9f7f6;
+  text-transform: capitalize;
+  padding: 0.5rem 2rem;
+  display: block;
+  border-radius: 10rem;
+  transition: all 0.8s;
+  font-size: 2.2rem;
+  opacity: 0.4;
+  border: none;
+  cursor: pointer; }
+  /* line 42, videoconferencing/static/videoconferencing/scss/_button.scss */
+  .forget-btn:hover {
+    background-color: #aaa;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.5rem);
+    opacity: 0.8; }
+  @media only screen and (max-width: 37.5em) {
+    /* line 28, videoconferencing/static/videoconferencing/scss/_button.scss */
+    .forget-btn {
+      font-size: 2rem;
+      pad: 1rem 2rem; } }
+/* line 1, videoconferencing/static/videoconferencing/scss/_signup.scss */
+.signup {
+  position: relative; }
+  /* line 4, videoconferencing/static/videoconferencing/scss/_signup.scss */
+  .signup__container {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 25%;
+    height: 20%; }
+    @media only screen and (max-width: 75em) {
+      /* line 4, videoconferencing/static/videoconferencing/scss/_signup.scss */
+      .signup__container {
+        width: 35%;
+        height: 30%; } }
+    @media only screen and (max-width: 56.26em) {
+      /* line 4, videoconferencing/static/videoconferencing/scss/_signup.scss */
+      .signup__container {
+        width: 40%;
+        height: 35%; } }
+    @media only screen and (max-width: 37.5em) {
+      /* line 4, videoconferencing/static/videoconferencing/scss/_signup.scss */
+      .signup__container {
+        width: 45%;
+        height: 40%; } }
+  /* line 29, videoconferencing/static/videoconferencing/scss/_signup.scss */
+  .signup__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+    padding-bottom: 3rem; }
+  /* line 38, videoconferencing/static/videoconferencing/scss/_signup.scss */
+  .signup__input:not(:last-child) {
+    font-size: 2rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1rem 2.5rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-bottom: 3px solid transparent;
+    display: block;
+    transition: all 0.2s;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1); }
+    /* line 51, videoconferencing/static/videoconferencing/scss/_signup.scss */
+    .signup__input:not(:last-child):focus {
+      outline: none;
+      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
+      border-bottom: 1rem solid green; }
+    /* line 57, videoconferencing/static/videoconferencing/scss/_signup.scss */
+    .signup__input:not(:last-child):focus:invalid {
+      border-bottom: 1rem solid #ff6600; }
+  @media only screen and (max-width: 75em) {
+    /* line 36, videoconferencing/static/videoconferencing/scss/_signup.scss */
+    .signup__input {
+      font-size: 1.7rem;
+      padding: 1.5rem 3.5rem; } }
+  @media only screen and (max-width: 56.26em) {
+    /* line 36, videoconferencing/static/videoconferencing/scss/_signup.scss */
+    .signup__input {
+      font-size: 1.5rem;
+      padding: 1rem 3rem; } }
+  @media only screen and (max-width: 37.5em) {
+    /* line 36, videoconferencing/static/videoconferencing/scss/_signup.scss */
+    .signup__input {
+      font-size: 1.2rem;
+      padding: 1rem 2rem; } }
+  /* line 84, videoconferencing/static/videoconferencing/scss/_signup.scss */
+  .signup__background {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), black);
+    opacity: 0.8;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; }
+
+/* line 93, videoconferencing/static/videoconferencing/scss/_signup.scss */
+#correct-password-label {
+  font-size: 1.8rem;
+  color: #60a760;
+  filter: brightness(60%); }
+
+/* line 99, videoconferencing/static/videoconferencing/scss/_signup.scss */
+#incorrect-password-label {
+  font-size: 1.8rem;
+  color: #ff6600; }
+
+/* line 1, videoconferencing/static/videoconferencing/scss/_login.scss */
+.login {
+  position: relative; }
+  /* line 4, videoconferencing/static/videoconferencing/scss/_login.scss */
+  .login__container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    width: 25%;
+    height: 20%; }
+    @media only screen and (max-width: 75em) {
+      /* line 4, videoconferencing/static/videoconferencing/scss/_login.scss */
+      .login__container {
+        width: 35%;
+        height: 30%; } }
+    @media only screen and (max-width: 56.26em) {
+      /* line 4, videoconferencing/static/videoconferencing/scss/_login.scss */
+      .login__container {
+        width: 40%;
+        height: 35%; } }
+    @media only screen and (max-width: 37.5em) {
+      /* line 4, videoconferencing/static/videoconferencing/scss/_login.scss */
+      .login__container {
+        width: 45%;
+        height: 40%; } }
+  /* line 29, videoconferencing/static/videoconferencing/scss/_login.scss */
+  .login__form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+    padding-bottom: 3rem; }
+  /* line 38, videoconferencing/static/videoconferencing/scss/_login.scss */
+  .login__input:not(:last-child) {
+    font-size: 2rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1rem 2.2rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-bottom: 3px solid transparent;
+    display: block;
+    transition: all 0.2s;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1); }
+    /* line 51, videoconferencing/static/videoconferencing/scss/_login.scss */
+    .login__input:not(:last-child):focus {
+      outline: none;
+      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
+      border-bottom: 1rem solid green; }
+    /* line 57, videoconferencing/static/videoconferencing/scss/_login.scss */
+    .login__input:not(:last-child):focus:invalid {
+      border-bottom: 1rem solid #ff6600; }
+  @media only screen and (max-width: 75em) {
+    /* line 36, videoconferencing/static/videoconferencing/scss/_login.scss */
+    .login__input {
+      font-size: 1.6rem;
+      padding: 1rem 2rem; } }
+  @media only screen and (max-width: 56.26em) {
+    /* line 36, videoconferencing/static/videoconferencing/scss/_login.scss */
+    .login__input {
+      font-size: 1.3rem;
+      padding: 1rem 1.5rem; } }
+  @media only screen and (max-width: 37.5em) {
+    /* line 36, videoconferencing/static/videoconferencing/scss/_login.scss */
+    .login__input {
+      font-size: 1rem;
+      padding: 1rem 2rem; } }
+  /* line 84, videoconferencing/static/videoconferencing/scss/_login.scss */
+  .login__background {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), black);
+    opacity: 0.8;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; }
+
+/* line 93, videoconferencing/static/videoconferencing/scss/_login.scss */
+.back_btn__container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  gap: 3rem; }
+  @media only screen and (max-width: 50em) {
+    /* line 93, videoconferencing/static/videoconferencing/scss/_login.scss */
+    .back_btn__container {
+      flex-direction: column;
+      gap: 1rem; } }
+/* line 105, videoconferencing/static/videoconferencing/scss/_login.scss */
+.back_btn {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #04070aea;
+  transition: all 0.5s; }
+  /* line 111, videoconferencing/static/videoconferencing/scss/_login.scss */
+  .back_btn:hover {
+    color: #f9f7f6; }
+
+/* line 3, videoconferencing/static/videoconferencing/scss/_forgotpassword.scss */
+.forget-input {
+  font-size: 2rem;
+  font-family: inherit;
+  color: inherit;
+  padding: 1rem 2.2rem;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-bottom: 3px solid transparent;
+  display: block;
+  transition: all 0.2s;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem; }
+  /* line 17, videoconferencing/static/videoconferencing/scss/_forgotpassword.scss */
+  .forget-input:focus {
+    outline: none;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
+    border-bottom: 1rem solid green; }
+  /* line 23, videoconferencing/static/videoconferencing/scss/_forgotpassword.scss */
+  .forget-input:focus:invalid {
+    border-bottom: 1rem solid #ff6600; }
+
+/* line 28, videoconferencing/static/videoconferencing/scss/_forgotpassword.scss */
+.forget__background {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), black);
+  opacity: 0.8;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  align-items: center;
+  padding-top: 8%; }
+
+/* line 42, videoconferencing/static/videoconferencing/scss/_forgotpassword.scss */
+.forget-anchor {
+  text-decoration: none;
+  color: #000;
+  font-size: 2rem;
+  font-weight: 500;
+  transition: all 0.5s; }
+  /* line 49, videoconferencing/static/videoconferencing/scss/_forgotpassword.scss */
+  .forget-anchor:hover {
+    color: #f9f7f6; }
+
+/* line 55, videoconferencing/static/videoconferencing/scss/_forgotpassword.scss */
+.msg {
+  color: #fff;
+  font-size: 1.5rem; }
+
+/* line 1, videoconferencing/static/videoconferencing/scss/_channel.scss */
+.channel {
+  position: relative;
+  width: 100vw;
+  height: 100vh; }
+  /* line 6, videoconferencing/static/videoconferencing/scss/_channel.scss */
+  .channel-container {
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 2rem;
+    background-color: rgba(170, 170, 170, 0.5);
+    filter: brightness(0.95);
+    width: 40vw;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+    @media only screen and (max-width: 37.5em) {
+      /* line 6, videoconferencing/static/videoconferencing/scss/_channel.scss */
+      .channel-container {
+        width: 70vw; } }
+  /* line 30, videoconferencing/static/videoconferencing/scss/_channel.scss */
+  .channel-input {
+    font-size: 2rem;
+    font-family: inherit;
+    color: inherit;
+    padding: 1rem 2.2rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-bottom: 1px solid transparent;
+    display: block;
+    transition: all 0.2s;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem; }
+    /* line 44, videoconferencing/static/videoconferencing/scss/_channel.scss */
+    .channel-input:focus {
+      outline: none;
+      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.1);
+      border-bottom: .3rem solid green; }
+    /* line 50, videoconferencing/static/videoconferencing/scss/_channel.scss */
+    .channel-input:focus:invalid {
+      border-bottom: 0.3rem solid #ff6600; }
+  /* line 55, videoconferencing/static/videoconferencing/scss/_channel.scss */
+  .channel-logo {
+    height: 4rem;
+    width: 4rem; }
+  @media only screen and (max-width: 50em) {
+    /* line 61, videoconferencing/static/videoconferencing/scss/_channel.scss */
+    .channel-input {
+      font-size: 1rem;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid transparent;
+      margin-bottom: 1rem; }
+    /* line 68, videoconferencing/static/videoconferencing/scss/_channel.scss */
+    .channel-btn {
+      padding: 0.5rem 2rem;
+      font-size: 1.5rem; }
+    /* line 73, videoconferencing/static/videoconferencing/scss/_channel.scss */
+    .channel-logo {
+      height: 3rem;
+      width: 3rem; } }
+@media only screen and (max-width: 50em) {
+  /* line 84, videoconferencing/static/videoconferencing/scss/_channel.scss */
+  .heading-2 {
+    font-size: 2rem; } }
+
+/* line 90, videoconferencing/static/videoconferencing/scss/_channel.scss */
+.navigation-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4rem;
+  font-size: 2rem;
+  padding: 1rem 4rem;
+  background-color: rgba(170, 170, 170, 0.3); }
+
+/* line 99, videoconferencing/static/videoconferencing/scss/_channel.scss */
+.navigation-link {
+  text-decoration: none;
+  color: #04070aea;
+  transition: all 0.3s; }
+  /* line 104, videoconferencing/static/videoconferencing/scss/_channel.scss */
+  .navigation-link:hover {
+    color: #55606bea;
+    transform: translateY(-0.1rem); }
+
+/* line 1, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+.videocal {
+  display: grid;
+  grid-template-columns: [right-start] 1fr [right-end middle-start] 98vw [middle-end left-start] 1fr [left-end];
+  grid-template-rows: [name-start] 5vh [name-end remote-start] 60vh [remote-end local-start] 35vh [local-end]; }
+  @media only screen and (max-width: 50em) {
+    /* line 1, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    .videocal {
+      grid-template-rows: [name-start] 5vh [name-end remote-start] 45vh [remote-end local-start] 50vh [local-end];
+      row-gap: 5rem; } }
+  /* line 11, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+  .videocal-channel {
+    grid-column: middle-start / middle-end;
+    grid-row: name-start / name-end;
+    margin: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; }
+    /* line 19, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    .videocal-channel_name {
+      color: #000;
+      z-index: 10;
+      position: relative;
+      font-size: 1.5rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 0.1rem 0.4rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5); }
+    /* line 30, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    .videocal-channel_logo {
+      filter: brightness(1.1);
+      margin-bottom: 2rem; }
+  /* line 36, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+  .videocal-local {
+    grid-column: middle-start / middle-end;
+    grid-row: local-start / local-end;
+    position: relative;
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0; }
+    @media only screen and (max-width: 50em) {
+      /* line 36, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+      .videocal-local {
+        flex-direction: column;
+        row-gap: 4rem; } }
+    /* line 51, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    .videocal-local_video {
+      width: 50%;
+      border-radius: 2rem; }
+      @media only screen and (max-width: 93.75em) {
+        /* line 51, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+        .videocal-local_video {
+          width: 55%; } }
+      @media only screen and (max-width: 75em) {
+        /* line 51, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+        .videocal-local_video {
+          width: 60%; } }
+      @media only screen and (max-width: 56.26em) {
+        /* line 51, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+        .videocal-local_video {
+          width: 70%; } }
+      @media only screen and (max-width: 50em) {
+        /* line 51, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+        .videocal-local_video {
+          width: 50%; } }
+    /* line 73, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    .videocal-local_username {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-left: 2rem;
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 0.1rem 0.4rem;
+      border-radius: 0.5rem; }
+  /* line 86, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+  .videocal-remote {
+    grid-column: right-start / left-end;
+    grid-row: name-start / local-end; }
+    /* line 90, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    .videocal-remote_video {
+      height: 100vh;
+      width: 100vw;
+      object-fit: cover; }
+      @media only screen and (max-width: 56.26em) {
+        /* line 90, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+        .videocal-remote_video {
+          height: 70vh;
+          width: 100vw; } }
+      @media only screen and (max-width: 50em) {
+        /* line 90, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+        .videocal-remote_video {
+          height: 50vh;
+          width: 100vw; } }
+    /* line 106, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    .videocal-remote_gif {
+      display: none;
+      height: 22vh;
+      width: 15vw;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2); }
+      @media only screen and (max-width: 37.5em) {
+        /* line 106, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+        .videocal-remote_gif {
+          height: 22vh;
+          width: 28vw; } }
+  /* line 123, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+  .videocal-controls {
+    display: flex;
+    column-gap: 5rem;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 2rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.6s; }
+    /* line 133, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    .videocal-controls:hover {
+      opacity: 1;
+      transform: translateY(1rem); }
+    @media only screen and (max-width: 50em) {
+      /* line 123, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+      .videocal-controls {
+        opacity: 1;
+        padding: 1.5rem; } }
+    @media only screen and (max-width: 37.5em) {
+      /* line 123, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+      .videocal-controls {
+        opacity: 1;
+        padding: 1rem; } }
+/* line 150, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+.control-img {
+  background: #04070aea;
+  height: 4rem;
+  width: 4rem;
+  border: none;
+  border-radius: 100%;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+  transition: all 0.3s; }
+  /* line 159, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+  .control-img:hover {
+    background: #f03d3d;
+    transform: translateY(-0.2rem); }
+
+/* line 165, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+#remote-username {
+  color: #000;
+  font-size: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 7rem;
+  right: 5rem;
+  margin: 4rem; }
+  @media only screen and (max-width: 37.5em) {
+    /* line 165, videoconferencing/static/videoconferencing/scss/_videocall.scss */
+    #remote-username {
+      top: 5rem; } }
