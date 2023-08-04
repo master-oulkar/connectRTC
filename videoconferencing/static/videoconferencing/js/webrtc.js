@@ -163,7 +163,7 @@ const sendUserOffer = async()=>{
 const sendUserAnswer = async (offer)=>{
     createUserConnection();
 
-    store.setRemoteUser(userconnection);
+    setRemoteUser(userconnection);
 
     let remoteuser = getState().remoteUser;
     
