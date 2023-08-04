@@ -32,7 +32,7 @@ SECRET_KEY = env('SECRET_KEY') #'django-insecure-8kb6@8_44_eqkx=)=vot@38#8@(og$=
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://*.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 
 # Application definition
 
