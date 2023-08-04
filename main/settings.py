@@ -77,7 +77,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'main.wsgi.application'
+#WSGI_APPLICATION = 'main.wsgi.application'
 ASGI_APPLICATION = "main.asgi.application"
 
 CHANNEL_LAYERS = {
@@ -146,12 +146,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATICFILES_FINDERS = (
-#     'django.contrib.staticfiles.finders.FileSystemFinder',
-#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#     # other finders..
-#     'compressor.finders.CompressorFinder',
-# )
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
 
 
 # Default primary key field type
