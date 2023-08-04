@@ -288,7 +288,7 @@ const closeRemoteVideo = () => {
 
 const cameraButton = document.getElementById('camera_button');
 cameraButton.addEventListener('click', () => {
-    const localStream = store.getState().localStream;
+    const localStream = getState().localStream;
     const cameraEnabled = localStream.getVideoTracks()[0].enabled;
     localStream.getVideoTracks()[0].enabled = !cameraEnabled;
     updateCameraButton(cameraEnabled);
@@ -304,7 +304,7 @@ const updateCameraButton = (cameraActive) => {
 
 const micButton = document.getElementById('mic_button');
 micButton.addEventListener('click', () => {
-    const localStream = store.getState().localStream;
+    const localStream = getState().localStream;
     const micEnabled = localStream.getAudioTracks()[0].enabled;
     localStream.getAudioTracks()[0].enabled = !micEnabled;
     updateMicButton(micEnabled);
