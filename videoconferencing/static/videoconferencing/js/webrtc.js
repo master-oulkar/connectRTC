@@ -51,6 +51,23 @@ const createUserConnection = ()=>{
     userconnection = new RTCPeerConnection(server);
     console.log('RTC userconnection established.');
 
+    // add local media
+    const localMedia = store.getState().localStream;
+    localMedia.getTracks().forEach((track) => {
+        userconnection.addTrack(track, localMedia);
+        console.log('local tracks added to RTC connection:',localMedia.getVideoTracks()[0]);
+    }); 
+
+    // add receiving tracks from remote user
+    const remoteMedia = new MediaStream();
+    store.setRemoteStream(remoteMedia);
+    const remoteUser = document.querySelector('#remoteuser');
+    remoteUser.srcObject = store.getState().remoteStream;
+    userconnection.ontrack = (event)=>{
+        remoteMedia.addTrack(event.track);
+        console.log('remote tracks added to RTC connection:',remoteMedia);
+    }; 
+    
     userconnection.onicecandidate = (event)=>{
         if(event.candidate){
             // send ice candidate
@@ -67,23 +84,6 @@ const createUserConnection = ()=>{
             console.log('succesfully connected to remote user.')
         };
     };
-
-    // add receiving tracks from remote user
-    const remoteMedia = new MediaStream();
-    store.setRemoteStream(remoteMedia);
-    const remoteUser = document.querySelector('#remoteuser');
-    remoteUser.srcObject = store.getState().remoteStream;
-    userconnection.ontrack = (event)=>{
-        remoteMedia.addTrack(event.track);
-        console.log('remote tracks added to RTC connection:',remoteMedia);
-    };
-    
-    // add local media
-    const localMedia = store.getState().localStream;
-    localMedia.getTracks().forEach((track) => {
-        userconnection.addTrack(track, localMedia);
-        console.log('local tracks added to RTC connection:',localMedia.getVideoTracks()[0]);
-    });  
 };
 
 
