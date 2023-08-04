@@ -1,9 +1,23 @@
-import * as store from './store_stream.js';
-import { updateCameraButton, updateMicButton, updateScreenSharingButton } from './videocall_controls.js';
+// event listeners for camera on - off
+const cameraOnImage = "/static/videoconferencing/img/camera.png"
+const cameraOffImage = "/static/videoconferencing/img/cameraOff.png"
+const micOnImage = "/static/videoconferencing/img/mic.png"
+const micOffImage = "/static/videoconferencing/img/micOff.png"
 
 let userconnection;
 let signaling_connection;
 let uid =  Math.floor((Math.random() * 1000));
+
+let streams = {
+    localStream : null,
+    remoteStream : null,
+    screenSharingStream: null,
+    remoteUser: null,
+    localUser: null,
+    screenSharingActive : false,
+    remoteUsername:null,
+};
+
 
 const server = {
     iceServer: [{
@@ -258,6 +272,11 @@ hangupButton.addEventListener('click', () => {
     }));
 })
 
+const updateScreenSharingButton = (screenActive) => {
+    const screenButtonImage = document.getElementById('screen_sharing_button');
+    screenButtonImage.style.background = screenActive ? 'rgb(240, 61, 61)' : '#04070aea';
+}
+
 const closeRemoteVideo = () => {
     const remoteUser = document.querySelector('#remoteuser');
     remoteUser.style.display = 'none';
@@ -275,6 +294,12 @@ cameraButton.addEventListener('click', () => {
     updateCameraButton(cameraEnabled);
 });
 
+const updateCameraButton = (cameraActive) => {
+    const cameraButtonImage = document.getElementById('camera_button_image');
+    cameraButtonImage.src = cameraActive ? cameraOffImage : cameraOnImage;
+    cameraButton.style.background = cameraActive ? 'rgb(240, 61, 61)' : '#04070aea';
+}
+
 // event listeners for mic on - off
 
 const micButton = document.getElementById('mic_button');
@@ -284,5 +309,65 @@ micButton.addEventListener('click', () => {
     localStream.getAudioTracks()[0].enabled = !micEnabled;
     updateMicButton(micEnabled);
 });
+
+const updateMicButton = (micActive) => {
+    const micButtonImage = document.getElementById('mic_button_image');
+    micButtonImage.src = micActive ? micOffImage : micOnImage;
+    micButton.style.background = micActive ? 'rgb(240, 61, 61)' : '#04070aea';
+};
+
+const setRemoteUsername = (username) => {
+    streams = {
+        ...streams,
+        remoteUsername: username,
+    };
+};
+
+const setLocalStrem = (stream) => {
+    streams = {
+        ...streams,
+        localStream: stream,
+    };
+};
+
+const setScreenSharingStream = (stream) => {
+    streams = {
+        ...streams,
+        screenSharingStream:stream,
+    };
+};
+
+const setRemoteStream = (stream)=>{
+    streams = {
+        ...streams,
+        remoteStream:stream,
+    };
+};
+
+
+const setLocalUser = (uid) => {
+    streams = {
+        ...streams,
+        localUser: uid,
+    };
+};
+
+const setRemoteUser = (uid) => {
+    streams = {
+        ...streams,
+        remoteUser: uid,
+    };
+};
+
+const setScreenSharingActive = (screenSharingActive) => {
+    streams = {
+        ...streams,
+        screenSharingActive: screenSharingActive,
+    };
+};
+
+const getState = ()=>{
+    return streams
+};
 
 getLocalMedia();
