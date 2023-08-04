@@ -22,15 +22,15 @@ export const updateCameraButton = (cameraActive) => {
 
 // event listeners for mic on - off
 
-const micButton = document.getElementById('mic_button');
-micButton.addEventListener('click', () => {
-    const localStream = store.getState().localStream;
-    const micEnabled = localStream.getAudioTracks()[0].enabled;
-    localStream.getAudioTracks()[0].enabled = !micEnabled;
-    updateMicButton(micEnabled);
-});
+// const micButton = document.getElementById('mic_button');
+// micButton.addEventListener('click', () => {
+//     const localStream = store.getState().localStream;
+//     const micEnabled = localStream.getAudioTracks()[0].enabled;
+//     localStream.getAudioTracks()[0].enabled = !micEnabled;
+//     updateMicButton(micEnabled);
+// });
 
-const updateMicButton = (micActive) => {
+export const updateMicButton = (micActive) => {
     const micButtonImage = document.getElementById('mic_button_image');
     micButtonImage.src = micActive ? micOffImage : micOnImage;
     micButton.style.background = micActive ? 'rgb(240, 61, 61)' : '#04070aea';
