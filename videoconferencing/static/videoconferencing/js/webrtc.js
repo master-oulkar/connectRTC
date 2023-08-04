@@ -72,7 +72,7 @@ const createUserConnection = ()=>{
     const remoteMedia = new MediaStream();
     store.setRemoteStream(remoteMedia);
     const remoteUser = document.querySelector('#remoteuser');
-    remoteUser.srcObject = store.getState().remoteStream;
+    remoteUser.srcObject = remoteMedia;
     userconnection.ontrack = (event)=>{
         remoteMedia.addTrack(event.track);
         console.log('remote tracks added to RTC connection:',remoteMedia);
