@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import dj_database_url
 import dj_redis_url
+import redis
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -84,7 +85,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [env('REDIS_URL')], #dj_redis_url.parse(env('REDIS_URL'))
+            "hosts": [redis.from_url(env('REDIS_URL'))], 
         },
     },
 }
