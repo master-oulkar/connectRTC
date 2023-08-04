@@ -1,5 +1,5 @@
 import * as store from './store_stream.js';
-import { updateScreenSharingButton } from './videocall_controls.js';
+import { updateCameraButton, updateScreenSharingButton } from './videocall_controls.js';
 
 let userconnection;
 let signaling_connection;
@@ -72,7 +72,7 @@ const createUserConnection = ()=>{
     const remoteMedia = new MediaStream();
     store.setRemoteStream(remoteMedia);
     const remoteUser = document.querySelector('#remoteuser');
-    remoteUser.srcObject = remoteMedia;
+    remoteUser.srcObject = store.getState().remoteStream;
     userconnection.ontrack = (event)=>{
         remoteMedia.addTrack(event.track);
         console.log('remote tracks added to RTC connection:',remoteMedia);
@@ -266,5 +266,13 @@ const closeRemoteVideo = () => {
     document.getElementById('channel-name').style.display = 'none';
     document.querySelector('.videocal-controls').style.opacity = 1;
 }
+
+const cameraButton = document.getElementById('camera_button');
+cameraButton.addEventListener('click', () => {
+    const localStream = store.getState().localStream;
+    const cameraEnabled = localStream.getVideoTracks()[0].enabled;
+    localStream.getVideoTracks()[0].enabled = !cameraEnabled;
+    updateCameraButton(cameraEnabled);
+});
 
 getLocalMedia();
