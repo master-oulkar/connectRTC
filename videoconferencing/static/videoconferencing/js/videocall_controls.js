@@ -6,15 +6,15 @@ const cameraOffImage = "/static/videoconferencing/img/cameraOff.png"
 const micOnImage = "/static/videoconferencing/img/mic.png"
 const micOffImage = "/static/videoconferencing/img/micOff.png"
 
-const cameraButton = document.getElementById('camera_button');
-cameraButton.addEventListener('click', () => {
-    const localStream = store.getState().localStream;
-    const cameraEnabled = localStream.getVideoTracks()[0].enabled;
-    localStream.getVideoTracks()[0].enabled = !cameraEnabled;
-    updateCameraButton(cameraEnabled);
-});
+// const cameraButton = document.getElementById('camera_button');
+// cameraButton.addEventListener('click', () => {
+//     const localStream = store.getState().localStream;
+//     const cameraEnabled = localStream.getVideoTracks()[0].enabled;
+//     localStream.getVideoTracks()[0].enabled = !cameraEnabled;
+//     updateCameraButton(cameraEnabled);
+// });
 
-const updateCameraButton = (cameraActive) => {
+export const updateCameraButton = (cameraActive) => {
     const cameraButtonImage = document.getElementById('camera_button_image');
     cameraButtonImage.src = cameraActive ? cameraOffImage : cameraOnImage;
     cameraButton.style.background = cameraActive ? 'rgb(240, 61, 61)' : '#04070aea';
