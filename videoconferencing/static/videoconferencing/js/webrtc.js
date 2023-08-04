@@ -275,4 +275,14 @@ cameraButton.addEventListener('click', () => {
     updateCameraButton(cameraEnabled);
 });
 
+// event listeners for mic on - off
+
+const micButton = document.getElementById('mic_button');
+micButton.addEventListener('click', () => {
+    const localStream = store.getState().localStream;
+    const micEnabled = localStream.getAudioTracks()[0].enabled;
+    localStream.getAudioTracks()[0].enabled = !micEnabled;
+    updateMicButton(micEnabled);
+});
+
 getLocalMedia();
