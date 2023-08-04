@@ -1,5 +1,3 @@
-import * as store from './store_stream.js';
-
 // event listeners for camera on - off
 const cameraOnImage = "/static/videoconferencing/img/camera.png"
 const cameraOffImage = "/static/videoconferencing/img/cameraOff.png"
