@@ -74,7 +74,7 @@ const createUserConnection = ()=>{
 
     // add receiving tracks from remote user
     const remoteMedia = new MediaStream();
-    store.setRemoteStream(remoteMedia);
+    setRemoteStream(remoteMedia);
     const remoteUser = document.querySelector('#remoteuser');
     remoteUser.srcObject = getState().remoteStream;
     userconnection.ontrack = (event)=>{
@@ -145,7 +145,7 @@ const handleMessage = (event)=>{
 const sendUserOffer = async()=>{
     createUserConnection();
 
-    store.setLocalUser(userconnection);
+    setLocalUser(userconnection);
 
     let localuser = getState().localUser;
 
