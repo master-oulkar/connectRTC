@@ -37,7 +37,7 @@ const getLocalMedia = async ()=>{
         console.log('screenActive:', screenActive);
     });
 
-    signaling_connection = new  WebSocket('ws://' + window.location.host + '/ws/videocall/' + channel_name + '/')
+    signaling_connection = new  WebSocket('wss://' + window.location.host + '/ws/videocall/' + channel_name + '/')
 
     signaling_connection.onopen = ()=>{
         signaling_connection.send(JSON.stringify({'type':'ready'}));
