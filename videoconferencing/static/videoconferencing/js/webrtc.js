@@ -1,5 +1,5 @@
 import * as store from './store_stream.js';
-import { updateCameraButton, updateScreenSharingButton } from './videocall_controls.js';
+import { updateCameraButton, updateMicButton, updateScreenSharingButton } from './videocall_controls.js';
 
 let userconnection;
 let signaling_connection;
