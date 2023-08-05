@@ -230,7 +230,7 @@ export const switchBetweenCameraAndScreenSharing = async (screenSharingActive)=>
         console.log('switching to screen sharing');
         try {
             screenSharingStream = await navigator.mediaDevices.getDisplayMedia({'audio':false, 'video':true});
-            store.setScreenSharingStream(screenSharingStream);
+            setScreenSharingStream(screenSharingStream);
             console.log('screen sharing media:',screenSharingStream.getVideoTracks()[0])
             let localUser = getState().localUser;
             const senders = localUser.getSenders();
