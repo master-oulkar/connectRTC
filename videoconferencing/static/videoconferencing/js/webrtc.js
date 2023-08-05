@@ -48,12 +48,13 @@ const getLocalMedia = async ()=>{
     screenSharingButton.addEventListener('click', async ()=>{
         const screenActive = getState().screenSharingActive;
         switchBetweenCameraAndScreenSharing(screenActive);
-        console.log('screenActive:', screenActive);
+        console.log('Screen sharing button clicked');
     });
 
     signaling_connection = new  WebSocket('wss://' + window.location.host + '/ws/videocall/' + channel_name + '/')
 
     signaling_connection.onopen = ()=>{
+        console.log('Websocket connection established');
         signaling_connection.send(JSON.stringify({'type':'ready'}));
     };
     
@@ -103,7 +104,6 @@ const createUserConnection = ()=>{
 
 const handleMessage = (event)=>{
     const data = JSON.parse(event.data);
-    console.log('received message from server:',data.message);
 
     switch (data.message.type){
         case 'offer':
@@ -152,6 +152,8 @@ const sendUserOffer = async()=>{
     const offer = await localuser.createOffer();
     await localuser.setLocalDescription(offer);
 
+    console.log('sdp offer to remote user: ', offer);
+    
     signaling_connection.send(JSON.stringify({
         'uid' : uid,
         'username':localUsername,
@@ -172,7 +174,7 @@ const sendUserAnswer = async (offer)=>{
     const answer = await remoteuser.createAnswer();
    
     await remoteuser.setLocalDescription(answer);
-
+    console.log('sdp answer from remote user: ', answer);
     signaling_connection.send(JSON.stringify({
         'uid':uid,
         'type' : 'answer',
@@ -183,7 +185,7 @@ const sendUserAnswer = async (offer)=>{
 const addAnswer = (answer)=>{
     let localuser = getState().localUser;
     localuser.setRemoteDescription(answer);
-    console.log('webrtc answer came:', answer)
+    console.log('remote answer came:', answer)
 };
 
 const addCandidate = async (candidate)=>{
