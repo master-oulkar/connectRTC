@@ -13,7 +13,6 @@ import environ
 import os
 from pathlib import Path
 import dj_database_url
-import redis
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,10 +79,6 @@ TEMPLATES = [
 #WSGI_APPLICATION = 'main.wsgi.application'
 ASGI_APPLICATION = "main.asgi.application"
 
-r = redis.from_url(env('REDIS_URL'))
-
-print('redis url: ',env('REDIS_URL'))
-print('redis: ', r)
 
 CHANNEL_LAYERS = {
     "default": {
