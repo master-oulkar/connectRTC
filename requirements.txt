@@ -1,4 +1,5 @@
-﻿asgiref==3.7.2
+aioredis==2.0.1
+asgiref==3.7.2
 async-timeout==4.0.2
 attrs==23.1.0
 autobahn==23.6.2
