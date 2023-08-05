@@ -260,8 +260,6 @@ hangupButton.addEventListener('click', () => {
 
     console.log('send request to peer for hangup')
 
-    window.open('/videocall/', '_self');
-
     userconnection.close();
 
     const localStream = getState().localStream;
@@ -273,6 +271,8 @@ hangupButton.addEventListener('click', () => {
         'uid' : uid,
         'type':'hangup',
     }));
+
+    window.open('/videocall/', '_self');
 })
 
 const updateScreenSharingButton = (screenActive) => {
