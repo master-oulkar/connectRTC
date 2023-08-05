@@ -81,8 +81,7 @@ TEMPLATES = [
 ASGI_APPLICATION = "main.asgi.application"
 
 r = redis.from_url(env('REDIS_URL'))
-r.set('key', 'redis-py')
-r.get('key')
+
 print('redis url: ',env('REDIS_URL'))
 print('redis: ', r)
 
