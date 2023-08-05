@@ -857,7 +857,7 @@ body {
     grid-column: right-start / left-end;
     grid-row: name-start / local-end; 
     
-     @media only screen and (max-width: 50em) {
+     @media only screen and (max-width: 37em) {
        grid-column: middle-start / middle-end;
        grid-row: remote-start / remote-end; 
      }}
