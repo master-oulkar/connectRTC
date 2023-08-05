@@ -51,7 +51,7 @@ const getLocalMedia = async ()=>{
         console.log('Screen sharing button clicked');
     });
 
-    signaling_connection = new  WebSocket('wss://' + window.location.host + '/ws/videocall/' + channel_name + '/')
+    signaling_connection = new  WebSocket('ws://' + window.location.host + '/ws/videocall/' + channel_name + '/')
 
     signaling_connection.onopen = ()=>{
         console.log('Websocket connection established');
