@@ -855,7 +855,12 @@ body {
   /* line 86, videoconferencing/static/videoconferencing/scss/_videocall.scss */
   .videocal-remote {
     grid-column: right-start / left-end;
-    grid-row: name-start / local-end; }
+    grid-row: name-start / local-end; 
+    
+     @media only screen and (max-width: 50em) {
+       grid-column: middle-start / middle-end;
+       grid-row: remote-start / remote-end; 
+     }}
     /* line 90, videoconferencing/static/videoconferencing/scss/_videocall.scss */
     .videocal-remote_video {
       height: 100vh;
