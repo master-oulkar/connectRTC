@@ -80,15 +80,21 @@ TEMPLATES = [
 #WSGI_APPLICATION = 'main.wsgi.application'
 ASGI_APPLICATION = "main.asgi.application"
 
+r = redis.from_url(env('REDIS_URL'))
+r.set('key', 'redis-py')
+r.get('key')
+print('redis url: ',env('REDIS_URL'))
+print('redis: ', r)
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [redis.from_url(env('REDIS_URL'))], 
+            "hosts": [r], 
         },
     },
 }
-print('redis url: ',env('REDIS_URL'))
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
