@@ -153,7 +153,7 @@ const sendUserOffer = async()=>{
     await localuser.setLocalDescription(offer);
 
     console.log('sdp offer to remote user: ', offer);
-    alert('offer',offer.sdp)
+    console.log('offer',offer.sdp)
     signaling_connection.send(JSON.stringify({
         'uid' : uid,
         'username':localUsername,
@@ -186,7 +186,7 @@ const addAnswer = (answer)=>{
     let localuser = getState().localUser;
     localuser.setRemoteDescription(answer);
     console.log('remote answer came:', answer)
-    alert('answer',offer.answer)
+    console.log('answer',answer.sdp)
 };
 
 const addCandidate = async (candidate)=>{
