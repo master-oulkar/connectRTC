@@ -8,6 +8,8 @@ let userconnection;
 let signaling_connection;
 let uid =  Math.floor((Math.random() * 1000));
 
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
 let streams = {
     localStream : null,
     remoteStream : null,
@@ -16,6 +18,7 @@ let streams = {
     localUser: null,
     screenSharingActive : false,
     remoteUsername:null,
+    isMobile: false,
 };
 
 
@@ -25,15 +28,34 @@ const server = {
     }]
 }
 
+
 const channel_name = document.querySelector('#channel-name').innerHTML;
 const localUsername = document.querySelector('#username').innerHTML;
 
 const getLocalMedia = async ()=>{
 
-    await navigator.mediaDevices.getUserMedia({'audio': true, 
-                                               'video': true,
-                                            })
+    if (isMobile) {
+        const screenSharingButton = document.getElementById('screen_sharing');
+        
+        screenSharingButton.addEventListener('click', async ()=>{
+            setIsMobile(!ismobile);
+        });
+        const constraints = {'audio': true, 
+                            'video': {facingMode: isMobile ? "environment":"user" },
+                             };
+    }else{
+        const constraints = {'audio': true, 
+                            'video': {facingMode: "user" },
+                             }
+        const screenSharingButton = document.getElementById('screen_sharing_button');
+        screenSharingButton.addEventListener('click', async ()=>{
+            const screenActive = getState().screenSharingActive;
+            switchBetweenCameraAndScreenSharing(screenActive);
+            console.log('Screen sharing button clicked');
+        });
+    }
 
+    await navigator.mediaDevices.getUserMedia(constraints)
     .then(localMedia => {
         setLocalStrem(localMedia);
         const localUser = document.querySelector('#localuser');
@@ -43,14 +65,7 @@ const getLocalMedia = async ()=>{
         console.log('accessing local media devices error: ', err);
     });
 
-    const screenSharingButton = document.getElementById('screen_sharing_button');
     
-    screenSharingButton.addEventListener('click', async ()=>{
-        const screenActive = getState().screenSharingActive;
-        switchBetweenCameraAndScreenSharing(screenActive);
-        console.log('Screen sharing button clicked');
-    });
-
     signaling_connection = new  WebSocket('wss://' + window.location.host + '/ws/videocall/' + channel_name + '/')
 
     signaling_connection.onopen = ()=>{
@@ -323,6 +338,13 @@ const setRemoteUsername = (username) => {
     streams = {
         ...streams,
         remoteUsername: username,
+    };
+};
+
+const setIsMobile = (condition) => {
+    streams = {
+        ...streams,
+        isMobile: condition,
     };
 };
 
