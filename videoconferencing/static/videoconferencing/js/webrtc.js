@@ -41,18 +41,16 @@ const getLocalMedia = async ()=>{
             setIsMobile(!ismobile);
         });
         const constraints = {'audio': true, 
-                            'video': {facingMode: isMobile ? "environment":"user" },
+                            'video': {facingMode: isMobile ? "user":"environment" },
                              };
+        const screenSharingButton = document.getElementById('screen_sharing_button');
+        screenSharingButton.style.display = 'none';
     }else{
         const constraints = {'audio': true, 
-                            'video': {facingMode: "user" },
+                            'video': true,
                              }
-        const screenSharingButton = document.getElementById('screen_sharing_button');
-        screenSharingButton.addEventListener('click', async ()=>{
-            const screenActive = getState().screenSharingActive;
-            switchBetweenCameraAndScreenSharing(screenActive);
-            console.log('Screen sharing button clicked');
-        });
+        const cameraSwitchButton = document.getElementById('camera_switch_button');
+        cameraSwitchButton.style.display = 'none';
     }
 
     await navigator.mediaDevices.getUserMedia(constraints)
@@ -74,6 +72,13 @@ const getLocalMedia = async ()=>{
     };
     
     signaling_connection.addEventListener('message', handleMessage);
+
+    const screenSharingButton = document.getElementById('screen_sharing_button');
+        screenSharingButton.addEventListener('click', async ()=>{
+            const screenActive = getState().screenSharingActive;
+            switchBetweenCameraAndScreenSharing(screenActive);
+            console.log('Screen sharing button clicked');
+        });
 };
 
 
