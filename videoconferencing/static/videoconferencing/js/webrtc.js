@@ -48,10 +48,7 @@ const getLocalMedia = async ()=>{
     };
         const constraints = {'audio': true, 
                             'video': true,
-                             }
-        const cameraSwitchButton = document.getElementById('camera_switch_button');
-        cameraSwitchButton.style.display = 'none';
-    
+                            }
 
     await navigator.mediaDevices.getUserMedia(constraints)
     .then(localMedia => {
@@ -233,14 +230,12 @@ export const switchBetweenCameraAndScreenSharing = async (screenSharingActive)=>
             };
 
         // stop screen sharing
-        store
-        .getState()
-        .screenSharingStream
-        .getTracks()
-        .forEach((track)=>{
+
+        
+        streams.screenSharingStream.getTracks().forEach((track)=>{
             track.stop();
         });
-
+    
         const localVideo = document.querySelector('#localuser');
         localVideo.srcObject = localStream;
         setScreenSharingActive(!screenSharingActive);
