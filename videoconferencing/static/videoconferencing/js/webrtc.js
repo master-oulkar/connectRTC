@@ -35,13 +35,13 @@ const localUsername = document.querySelector('#username').innerHTML;
 const getLocalMedia = async ()=>{
 
     if (isMobile) {
-        const screenSharingButton = document.getElementById('screen_sharing');
-        
-        screenSharingButton.addEventListener('click', async ()=>{
+        const cameraSwitchButton = document.getElementById('camera_switch_button');
+         cameraSwitchButton.style.display = 'block';
+        cameraSwitchButton.addEventListener('click', async ()=>{
             setIsMobile(!ismobile);
         });
         const constraints = {'audio': true, 
-                            'video': {facingMode: isMobile ? "user":"environment" },
+                            'video': {facingMode: streams.isMobile ? "user":"environment" },
                              };
         const screenSharingButton = document.getElementById('screen_sharing_button');
         screenSharingButton.style.display = 'none';
