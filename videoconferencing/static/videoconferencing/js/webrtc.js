@@ -45,13 +45,13 @@ const getLocalMedia = async ()=>{
                              };
         const screenSharingButton = document.getElementById('screen_sharing_button');
         screenSharingButton.style.display = 'none';
-    }else{
+    };
         const constraints = {'audio': true, 
                             'video': true,
                              }
         const cameraSwitchButton = document.getElementById('camera_switch_button');
         cameraSwitchButton.style.display = 'none';
-    }
+    
 
     await navigator.mediaDevices.getUserMedia(constraints)
     .then(localMedia => {
