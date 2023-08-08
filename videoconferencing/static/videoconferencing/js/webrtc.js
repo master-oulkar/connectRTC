@@ -1,11 +1,26 @@
-import * as store from './store_stream.js';
-import { updateScreenSharingButton } from './videocall_controls.js';
-
 let userconnection;
 let signaling_connection;
 let uid = Math.floor((Math.random() * 1000));
 var startTime;
+// button images
+const cameraOnImage = "/static/videoconferencing/img/camera.png"
+const cameraOffImage = "/static/videoconferencing/img/cameraOff.png"
+const micOnImage = "/static/videoconferencing/img/mic.png"
+const micOffImage = "/static/videoconferencing/img/micOff.png"
+// storage streams
+let streams = {
+    localStream : null,
+    remoteStream : null,
+    screenSharingStream: null,
+    remoteUser: null,
+    localUser: null,
+    screenSharingActive : false,
+    remoteUsername:null,
+    cameraActive: false,
+    backCameraStream:null,
+};
 
+// channel name and local username
 const channel_name = document.querySelector('#channel-name').innerHTML;
 const localUsername = document.querySelector('#username').innerHTML;
 
@@ -37,13 +52,14 @@ window.addEventListener('online', (e) => {
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 console.log('isMobile device: ', isMobile);
 
+// stun server
 const server = {
     iceServer: [{
         urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302']
     }]
 };
 
-
+// show camera switch button on mobile devices
 if (isMobile) {
     const screenSharingButton = document.getElementById('screen_sharing_button');
     screenSharingButton.style.display = 'none';
@@ -59,7 +75,7 @@ const getLocalMedia = async () => {
         'video': true,
     })
         .then(localMedia => {
-            store.setLocalStrem(localMedia);
+            setLocalStrem(localMedia);
             const localUser = document.querySelector('#localuser');
             localUser.srcObject = localMedia;
             console.log('local media devices got connected:', localMedia)
@@ -70,7 +86,7 @@ const getLocalMedia = async () => {
     const screenSharingButton = document.getElementById('screen_sharing_button');
 
     screenSharingButton.addEventListener('click', async () => {
-        const screenActive = store.getState().screenSharingActive;
+        const screenActive = getState().screenSharingActive;
         switchBetweenCameraAndScreenSharing(screenActive);
         console.log('screenActive:', screenActive);
     });
@@ -78,7 +94,7 @@ const getLocalMedia = async () => {
     const changeCameraButton = document.getElementById('camera_switch_button');
 
     changeCameraButton.addEventListener('click', async () => {
-        const cameraActive = store.getState().cameraActive;
+        const cameraActive = getState().cameraActive;
         switchCamera(cameraActive);
         console.log('cameraActive:', cameraActive);
     });
@@ -108,16 +124,16 @@ const createUserConnection = () => {
 
     // add receiving tracks from remote user
     const remoteMedia = new MediaStream();
-    store.setRemoteStream(remoteMedia);
+    setRemoteStream(remoteMedia);
     const remoteUser = document.querySelector('#remoteuser');
-    remoteUser.srcObject = store.getState().remoteStream;
+    remoteUser.srcObject = getState().remoteStream;
     userconnection.ontrack = (event) => {
         remoteMedia.addTrack(event.track);
         console.log('remote tracks added to RTC connection:', remoteMedia);
     };
 
     // add local media
-    const localMedia = store.getState().localStream;
+    const localMedia = getState().localStream;
     localMedia.getTracks().forEach((track) => {
         userconnection.addTrack(track, localMedia);
         console.log('local tracks added to RTC connection:', localMedia.getVideoTracks()[0]);
@@ -145,8 +161,9 @@ const createUserConnection = () => {
             remoteUser.style.display = 'block';
             const videocalremote_gif = document.querySelector('.videocal-remote_gif');
             videocalremote_gif.style.display = 'none';
+        } else if (userconnection.connectionState === 'connecting'){
+            console.log('remote user connecting.')
         } else {
-            console.log('remote user disconnected.')
             remoteUser.style.display = 'none';
             const videocalremote_gif = document.querySelector('.videocal-remote_gif');
             videocalremote_gif.style.display = 'block';
@@ -199,9 +216,9 @@ const handleMessage = (event) => {
 const sendUserOffer = async () => {
     createUserConnection();
 
-    store.setLocalUser(userconnection);
+    setLocalUser(userconnection);
 
-    let localuser = store.getState().localUser;
+    let localuser = getState().localUser;
 
     const offer = await localuser.createOffer();
     await localuser.setLocalDescription(offer);
@@ -217,9 +234,9 @@ const sendUserOffer = async () => {
 const sendUserAnswer = async (offer) => {
     createUserConnection();
 
-    store.setRemoteUser(userconnection);
+    setRemoteUser(userconnection);
 
-    let remoteuser = store.getState().remoteUser;
+    let remoteuser = getState().remoteUser;
 
     await remoteuser.setRemoteDescription(offer);
 
@@ -235,7 +252,7 @@ const sendUserAnswer = async (offer) => {
 };
 
 const addAnswer = (answer) => {
-    let localuser = store.getState().localUser;
+    let localuser = getState().localUser;
     localuser.setRemoteDescription(answer);
     console.log('webrtc answer came:', answer)
 };
@@ -255,8 +272,8 @@ let screenSharingStream;
 
 const switchBetweenCameraAndScreenSharing = async (screenSharingActive) => {
     if (screenSharingActive) {
-        const localStream = store.getState().localStream;
-        let localUser = store.getState().localUser;
+        const localStream = getState().localStream;
+        let localUser = getState().localUser;
         const senders = localUser.getSenders();
         const sender = senders.find((sender) =>
             sender.track.kind === localStream.getVideoTracks()[0].kind);
@@ -265,26 +282,20 @@ const switchBetweenCameraAndScreenSharing = async (screenSharingActive) => {
         };
 
         // stop screen sharing
-        store
-            .getState()
-            .screenSharingStream
-            .getTracks()
-            .forEach((track) => {
-                track.stop();
-            });
+        streams.getState().screenSharingStream.getTracks().forEach((track) => {track.stop();});
 
         const localVideo = document.querySelector('#localuser');
         localVideo.srcObject = localStream;
-        store.setScreenSharingActive(!screenSharingActive);
+        setScreenSharingActive(!screenSharingActive);
 
         updateScreenSharingButton(!screenSharingActive);
     } else {
         console.log('switching to screen sharing');
         try {
             screenSharingStream = await navigator.mediaDevices.getDisplayMedia({ 'audio': false, 'video': true });
-            store.setScreenSharingStream(screenSharingStream);
+            setScreenSharingStream(screenSharingStream);
             console.log('screen sharing media:', screenSharingStream.getVideoTracks()[0])
-            let localUser = store.getState().localUser;
+            let localUser = getState().localUser;
             const senders = localUser.getSenders();
             console.log('senders:', senders);
             const sender = senders.find((sender) =>
@@ -296,7 +307,7 @@ const switchBetweenCameraAndScreenSharing = async (screenSharingActive) => {
             };
             const localVideo = document.querySelector('#localuser');
             localVideo.srcObject = screenSharingStream;
-            store.setScreenSharingActive(!screenSharingActive);
+            setScreenSharingActive(!screenSharingActive);
             updateScreenSharingButton(!screenSharingActive);
         } catch (error) {
             console.log('error in screen sharing:', error)
@@ -310,17 +321,11 @@ let frontCameraStream;
 const switchCamera = async (cameraActive) => {
     if (cameraActive) {
         // stop back camera sharing
-        store
-            .getState()
-            .backCameraStream
-            .getTracks()
-            .forEach((track) => {
-                track.stop();
-            });
+        streams.getState().backCameraStream.getTracks().forEach((track) => {track.stop();});
 
         frontCameraStream = await navigator.mediaDevices.getUserMedia({ 'audio': true, 'video': { facingMode: 'user' } });
-        store.setLocalStrem(frontCameraStream);
-        let localUser = store.getState().localUser;
+        setLocalStrem(frontCameraStream);
+        let localUser = getState().localUser;
         const senders = localUser.getSenders();
         const sender = senders.find((sender) =>
             sender.track.kind === frontCameraStream.getVideoTracks()[0].kind);
@@ -330,23 +335,17 @@ const switchCamera = async (cameraActive) => {
 
         const localVideo = document.querySelector('#localuser');
         localVideo.srcObject = frontCameraStream;
-        store.setCameraActive(!cameraActive);
+        setCameraActive(!cameraActive);
         updateMobileCameraButton(!cameraActive);
     } else {
         console.log('switching camera');
         try {
             // stop back camera sharing
-            store
-                .getState()
-                .localStream
-                .getTracks()
-                .forEach((track) => {
-                    track.stop();
-                });
+            streams.getState().localStream.getTracks().forEach((track) => { track.stop();});
 
             backCameraStream = await navigator.mediaDevices.getUserMedia({ 'audio': true, 'video': { facingMode: 'environment' } });
-            store.setBackCameraStream(backCameraStream);
-            let localUser = store.getState().localUser;
+            setBackCameraStream(backCameraStream);
+            let localUser = getState().localUser;
             const senders = localUser.getSenders();
             console.log('senders:', senders);
             const sender = senders.find((sender) =>
@@ -358,7 +357,7 @@ const switchCamera = async (cameraActive) => {
             };
             const localVideo = document.querySelector('#localuser');
             localVideo.srcObject = backCameraStream;
-            store.setCameraActive(!cameraActive);
+            setCameraActive(!cameraActive);
             updateMobileCameraButton(!cameraActive); //this button hase same styling as screen sharing, this function just change color to red button.
         } catch (error) {
             console.log('error camera switching:', error)
@@ -376,7 +375,7 @@ hangupButton.addEventListener('click', () => {
 
     userconnection.close();
 
-    const localStream = store.getState().localStream;
+    const localStream = getState().localStream;
     localStream.getTracks().forEach(function (track) {
         track.stop();
     });
@@ -397,6 +396,121 @@ const closeRemoteVideo = () => {
     document.getElementById('channel-name').style.display = 'none';
     document.querySelector('.videocal-controls').style.opacity = 1;
 }
+
+const cameraButton = document.getElementById('camera_button');
+cameraButton.addEventListener('click', () => {
+    const localStream = getState().localStream;
+    const cameraEnabled = localStream.getVideoTracks()[0].enabled;
+    localStream.getVideoTracks()[0].enabled = !cameraEnabled;
+    updateCameraButton(cameraEnabled);
+});
+
+const updateCameraButton = (cameraActive) => {
+    const cameraButtonImage = document.getElementById('camera_button_image');
+    cameraButtonImage.src = cameraActive ? cameraOffImage : cameraOnImage;
+    cameraButton.style.background = cameraActive ? 'rgb(240, 61, 61)' : '#04070aea';
+}
+
+// event listeners for mic on - off
+
+const micButton = document.getElementById('mic_button');
+micButton.addEventListener('click', () => {
+    const localStream = getState().localStream;
+    const micEnabled = localStream.getAudioTracks()[0].enabled;
+    localStream.getAudioTracks()[0].enabled = !micEnabled;
+    updateMicButton(micEnabled);
+});
+
+const updateMicButton = (micActive) => {
+    const micButtonImage = document.getElementById('mic_button_image');
+    micButtonImage.src = micActive ? micOffImage : micOnImage;
+    micButton.style.background = micActive ? 'rgb(240, 61, 61)' : '#04070aea';
+};
+
+
+// update screen sharing button
+const updateScreenSharingButton = (screenActive) => {
+    const screenButtonImage = document.getElementById('screen_sharing_button');
+    screenButtonImage.style.background = screenActive ? 'rgb(240, 61, 61)' : '#04070aea';
+};
+
+// update camera buttons
+
+const updateMobileCameraButton = (screenActive) => {
+    const cameraButtonImage = document.getElementById('camera_switch_button');
+    cameraButtonImage.style.background = screenActive ? 'rgb(240, 61, 61)' : '#04070aea';
+}
+
+// functions for storage purpose
+const setBackCameraStream = (stream)=>{
+    streams = {
+        ...streams,
+        backCameraStream: stream,
+    };
+}
+
+const setCameraActive = (condition)=>{
+    streams = {
+        ...streams,
+        cameraActive: condition,
+    };
+}
+
+const setRemoteUsername = (username) => {
+    streams = {
+        ...streams,
+        remoteUsername: username,
+    };
+};
+
+const setLocalStrem = (stream) => {
+    streams = {
+        ...streams,
+        localStream: stream,
+    };
+};
+
+
+const setScreenSharingStream = (stream) => {
+    streams = {
+        ...streams,
+        screenSharingStream:stream,
+    };
+};
+
+const setRemoteStream = (stream)=>{
+    streams = {
+        ...streams,
+        remoteStream:stream,
+    };
+};
+
+const setLocalUser = (uid) => {
+    streams = {
+        ...streams,
+        localUser: uid,
+    };
+};
+
+const setRemoteUser = (uid) => {
+    streams = {
+        ...streams,
+        remoteUser: uid,
+    };
+};
+
+const setScreenSharingActive = (screenSharingActive) => {
+    streams = {
+        ...streams,
+        screenSharingActive: screenSharingActive,
+    };
+};
+
+
+const getState = ()=>{
+    return streams
+};
+
 
 getLocalMedia();
 
