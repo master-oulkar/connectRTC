@@ -83,7 +83,7 @@ const getLocalMedia = async () => {
         console.log('cameraActive:', cameraActive);
     });
 
-    signaling_connection = new WebSocket('ws://' + window.location.host + '/ws/videocall/' + channel_name + '/')
+    signaling_connection = new WebSocket('wss://' + window.location.host + '/ws/videocall/' + channel_name + '/')
 
     signaling_connection.addEventListener('error', (event) => {
         alert('websocket connection error:', event)
