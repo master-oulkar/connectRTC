@@ -323,7 +323,7 @@ const switchCamera = async (cameraActive) => {
         console.log('switching camera');
         try {
             // stop back camera sharing
-            getState().backCameraStream.getTracks().forEach((track) => {track.stop();});
+            streams.backCameraStream.getTracks().forEach((track) => {track.stop();});
     
             frontCameraStream = await navigator.mediaDevices.getUserMedia({ 'audio': true, 'video': { facingMode: 'user' } });
             setLocalStrem(frontCameraStream);
@@ -346,7 +346,7 @@ const switchCamera = async (cameraActive) => {
         console.log('switching camera');
         try {
             // stop back camera sharing
-            getState().localStream.getTracks().forEach((track) => { track.stop();});
+            streams.localStream.getTracks().forEach((track) => { track.stop();});
 
             backCameraStream = await navigator.mediaDevices.getUserMedia({ 'audio': true, 'video': { facingMode: 'environment' } });
             setBackCameraStream(backCameraStream);
