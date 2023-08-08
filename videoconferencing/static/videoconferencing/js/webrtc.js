@@ -282,7 +282,7 @@ const switchBetweenCameraAndScreenSharing = async (screenSharingActive) => {
         };
 
         // stop screen sharing
-        streams.getState().screenSharingStream.getTracks().forEach((track) => {track.stop();});
+        streams.screenSharingStream.getTracks().forEach((track) => {track.stop();});
 
         const localVideo = document.querySelector('#localuser');
         localVideo.srcObject = localStream;
@@ -320,28 +320,33 @@ let backCameraStream;
 let frontCameraStream;
 const switchCamera = async (cameraActive) => {
     if (cameraActive) {
-        // stop back camera sharing
-        streams.getState().backCameraStream.getTracks().forEach((track) => {track.stop();});
-
-        frontCameraStream = await navigator.mediaDevices.getUserMedia({ 'audio': true, 'video': { facingMode: 'user' } });
-        setLocalStrem(frontCameraStream);
-        let localUser = getState().localUser;
-        const senders = localUser.getSenders();
-        const sender = senders.find((sender) =>
-            sender.track.kind === frontCameraStream.getVideoTracks()[0].kind);
-        if (sender) {
-            sender.replaceTrack(frontCameraStream.getVideoTracks()[0]);
-        };
-
-        const localVideo = document.querySelector('#localuser');
-        localVideo.srcObject = frontCameraStream;
-        setCameraActive(!cameraActive);
-        updateMobileCameraButton(!cameraActive);
+        console.log('switching camera');
+        try {
+            // stop back camera sharing
+            getState().backCameraStream.getTracks().forEach((track) => {track.stop();});
+    
+            frontCameraStream = await navigator.mediaDevices.getUserMedia({ 'audio': true, 'video': { facingMode: 'user' } });
+            setLocalStrem(frontCameraStream);
+            let localUser = getState().localUser;
+            const senders = localUser.getSenders();
+            const sender = senders.find((sender) =>
+                sender.track.kind === frontCameraStream.getVideoTracks()[0].kind);
+            if (sender) {
+                sender.replaceTrack(frontCameraStream.getVideoTracks()[0]);
+            };
+    
+            const localVideo = document.querySelector('#localuser');
+            localVideo.srcObject = frontCameraStream;
+            setCameraActive(!cameraActive);
+            updateMobileCameraButton(!cameraActive);
+         } catch (error) {
+            console.log('error camera switching:', error)
+        }
     } else {
         console.log('switching camera');
         try {
             // stop back camera sharing
-            streams.getState().localStream.getTracks().forEach((track) => { track.stop();});
+            getState().localStream.getTracks().forEach((track) => { track.stop();});
 
             backCameraStream = await navigator.mediaDevices.getUserMedia({ 'audio': true, 'video': { facingMode: 'environment' } });
             setBackCameraStream(backCameraStream);
