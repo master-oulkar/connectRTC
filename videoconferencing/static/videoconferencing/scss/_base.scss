@@ -1,0 +1,47 @@
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html{
+    box-sizing: border-box;
+    font-size: 62.5%; //1rem=10px, 10/16=0.625.
+}
+
+body{
+    font-family: $font-primary;
+    color: $color-secondary;
+    font-weight: 300;
+    line-height: 1.6;
+    background-color: $color-grey-light-1;
+}
+
+.container{
+    background-color: aliceblue;
+
+    display: grid;
+    // grid-template-columns: [right-start] 1fr [right-end container-start] 70vw [container-end left-start] 1fr [left-end];
+    grid-template-rows: 100vh repeat(3, minmax(30rem, min-content)) max-content;
+
+    @media only screen and (max-width:$bp-large){
+        grid-template-rows: 90vh repeat(3, minmax(30rem, min-content)) max-content;
+    }
+
+    @media only screen and (max-width:$bp-medium){
+        grid-template-rows: 80vh repeat(3, minmax(30rem, min-content)) max-content;
+    }
+}
+
+#signup,
+#login{
+    display: none;
+}
+
+#correct-password-label,
+#incorrect-password-label{
+    display : none;
+}
+

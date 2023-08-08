@@ -1,0 +1,53 @@
+.btn{
+    background-color: $color-grey-light-1;
+    text-transform: uppercase;
+    padding: 1.5rem 4rem;
+    display: block;
+    border-radius: 10rem;
+    transition: all 0.8s;
+    font-size: 2.2rem;
+    opacity: 0.4;
+    
+
+    border: none;
+    cursor: pointer;
+
+    &:hover{
+        background-color: $color-grey-light-2;
+        box-shadow: 0 1rem 2rem rgba(#000,0.2);
+        transform: translateY(-0.5rem);
+        opacity: 0.8;
+    }
+
+    @media only screen and (max-width:$bp-small){
+        font-size: 2rem;
+        pad: 1rem 2rem;
+    }
+}
+
+.forget-btn{
+    background-color: $color-grey-light-1;
+    text-transform: capitalize;
+    padding: 0.5rem 2rem;
+    display: block;
+    border-radius: 10rem;
+    transition: all 0.8s;
+    font-size: 2.2rem;
+    opacity: 0.4;
+    
+
+    border: none;
+    cursor: pointer;
+
+    &:hover{
+        background-color: $color-grey-light-2;
+        box-shadow: 0 1rem 2rem rgba(#000,0.2);
+        transform: translateY(-0.5rem);
+        opacity: 0.8;
+    }
+
+    @media only screen and (max-width:$bp-small){
+        font-size: 2rem;
+        pad: 1rem 2rem;
+    }
+}

@@ -1,0 +1,76 @@
+.content{
+    background-color: $color-grey-light-1;
+    // grid-column: container-start / container-end;
+    padding: 5rem 20rem;
+    font-size: 2rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, minmax(20rem, mix-content));
+    gap: 8rem;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    &__img{
+        width: 100%;
+        border-radius: 2rem;
+
+        box-shadow: 0 1rem 3rem rgba(#000, 0.5);
+
+        @media only screen and (max-width:$bp-large-s){
+            
+        }
+    }
+
+    &__details{
+        padding: 5rem;
+        padding-top: 2rem;
+
+        &--shiftcontent{
+            @media only screen and (max-width:$bp-large-s){
+                grid-row: 3 / 4;
+            }
+        }
+
+    }
+
+    &__p{
+        font-size: 2.2rem;
+        text-align: justify;
+
+        @media only screen and (max-width:$bp-largest){
+            font-size: 2rem;
+        }
+
+        @media only screen and (max-width:$bp-medium){
+            font-size: 1.8rem;
+        }
+
+        @media only screen and (max-width:$bp-small){
+            font-size: 1.3rem;
+        }
+    }
+
+    // 1200px
+    @media only screen and (max-width:$bp-largest){
+        gap: 5rem;
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+    // 1000px
+    @media only screen and (max-width:$bp-large){
+        gap: 2rem;
+    }
+    // 900px
+    @media only screen and (max-width:$bp-large-s){
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(6, minmax(15rem, max-content));
+        gap: 1rem;
+    }
+    // 800px
+    @media only screen and (max-width:$bp-medium){
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}

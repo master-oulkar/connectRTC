@@ -1,0 +1,53 @@
+.queries{
+    background-color: $color-grey-light-1;
+    // grid-column: container-start / container-end;
+    padding-bottom: 3rem;
+    padding-top: 0rem;
+    padding-left: 20rem;
+    padding-right: 20rem;
+
+    display: grid;
+    grid-template-rows: min-content min-content;
+    row-gap: 2rem;
+    justify-content: center;
+    align-content: center;
+
+    @media only screen and (max-width:$bp-largest){
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    @media only screen and (max-width:$bp-medium){
+        padding: 5rem;
+        .heading-3{
+            text-align: center;
+        }
+    }
+
+    &__list{
+        font-size: 1.75rem;
+        font-weight: 500;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(min-content, max-content));
+        column-gap: 4rem;
+
+        @media only screen and (max-width:$bp-medium){
+            grid-template-columns: auto;
+            grid-template-rows: repeat(3, minmax(min-content, max-content));
+            row-gap: 3rem;
+        }
+    }
+
+    &__list-ans{
+        font-size: 1.5rem;
+        text-align: justify;
+
+        @media only screen and (max-width:$bp-medium){
+            font-size: 2rem;
+        }
+
+        @media only screen and (max-width:$bp-small){
+            font-size: 1.5rem;
+        }
+    }
+}

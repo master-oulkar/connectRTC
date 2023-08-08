@@ -1,0 +1,38 @@
+// COLOR VARIABLES
+$color-primary: #118ab2e2;
+$color-primary-dark: #0e5167e2;
+$color-secondary: #04070aea;
+
+$color-grey-light-1: #f9f7f6;
+$color-grey-light-2: #aaa;
+
+$color-grey-dark-1: #54483A;
+$color-grey-dark-2: #6D5D4B;
+
+// FONT VARIABLES
+$font-primary: 'Nunito', sans-serif;
+$font-display: 'Josefin Sans', sans-serif;
+
+// break points
+$bp : 93.75em; // 1500px/16 = 93.75em
+$bp-largest: 75em; //1200px
+$bp-large: 62.5em; //1000px/16=62.5em
+$bp-large-s: 56.26em; //900/16 = 56.26em
+$bp-medium: 50em; //800px
+$bp-small: 37.5em ; //600px
+
+// component file imports
+@import './base.scss';
+@import './footer';
+@import './header';
+@import './content';
+@import './getstarted';
+@import './queries';
+@import './fontheading';
+@import './button';
+@import './signup';
+@import './login';
+@import './forgotpassword';
+@import './channel';
+@import './videocall';
+
