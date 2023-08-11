@@ -8,13 +8,29 @@ from django.contrib import messages
 from django.conf import settings
 from django.core.mail import BadHeaderError, send_mail
 import random 
-import time
+import environ
 import re
 import json
 from .models import *
 
 # varification code choice number from this list
 number_list = [0,1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+env = environ.Env()
+environ.Env.read_env()
+
+# TURN server credentials
+TWILIO_SID = env('TWILIO_SID')
+TWILIO_TOKRN = env('TWILIO_TOKRN')
+client = Client(TWILIO_SID, TWILIO_TOKRN)
+
+token = client.tokens.create()
+
+#send STUN/TURN servers list to webrtc
+@login_required(login_url="/")
+def turn_server(request):
+    return JsonResponse({'servers':token.ice_servers}, safe=False)
+
 
 # home page function view
 def home(request):
