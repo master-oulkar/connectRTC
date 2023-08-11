@@ -54,26 +54,31 @@ window.addEventListener('online', (e) => {
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 console.log('isMobile device: ', isMobile);
 
-// get server configurations from django
-let iceServers = async () => {
-    await fetch('/turn_server/', {
-        method: 'GET',
-    })
-    .then(response => response.json()
-    )
-    .then(ser => {
-        twilioServers = ser.servers
-        const server = {
-            iceServer: [...twilioServers, {urls:'stun:stun1.l.google.com:19302', url:'stun:stun2.l.google.com:19302'}]
-        }; 
-        console.log(server)
-        return server;
-    })
-    .catch( err => {
-        console.log('iceservers fetching error from twilio:', err)
-    });
-};
+// // get server configurations from django
+// let iceServers = async () => {
+//     await fetch('/turn_server/', {
+//         method: 'GET',
+//     })
+//     .then(response => response.json()
+//     )
+//     .then(ser => {
+//         twilioServers = ser.servers
+//         const server = {
+//             iceServer: [...twilioServers, {urls:'stun:stun1.l.google.com:19302', url:'stun:stun2.l.google.com:19302'}]
+//         }; 
+//         console.log(server)
+//         return server;
+//     })
+//     .catch( err => {
+//         console.log('iceservers fetching error from twilio:', err)
+//     });
+// };
 
+ const server = {
+            iceServer: [{
+                urls:['stun:stun1.l.google.com:19302','stun:stun2.l.google.com:19302']
+            }]
+        };
 
 // show camera switch button on mobile devices
 if (isMobile) {
@@ -268,7 +273,7 @@ const sendUserAnswer = async (offer) => {
 };
 
 const addAnswer = (answer) => {
-    let localuser = getState().localUser;
+    let localuser = streams.localUser;
     localuser.setRemoteDescription(answer);
     console.log('webrtc answer came:', answer)
 };
