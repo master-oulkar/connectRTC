@@ -138,7 +138,7 @@ const getLocalMedia = async () => {
 
 
 const createUserConnection = () => {
-    userconnection = new RTCPeerConnection(iceServers());
+    userconnection = new RTCPeerConnection(server);
     console.log('RTC userconnection established.');
     
     startTime = window.performance.now();
