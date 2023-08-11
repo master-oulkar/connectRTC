@@ -12,4 +12,5 @@ urlpatterns = [
     path('reset_password/', views.reset_password, name='reset_password'), 
     path('videocall/', views.channel, name='channel' ),
     path('videocall/<str:channel_name>/', views.videocall, name='videocall' ),
+    path('turn_server/', views.turn_server),
 ]
