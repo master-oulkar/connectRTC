@@ -2,6 +2,8 @@ let userconnection;
 let signaling_connection;
 let uid = Math.floor((Math.random() * 1000));
 var startTime;
+let twilioServers=[];
+
 // button images
 const cameraOnImage = "/static/videoconferencing/img/camera.png"
 const cameraOffImage = "/static/videoconferencing/img/cameraOff.png"
@@ -52,12 +54,26 @@ window.addEventListener('online', (e) => {
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 console.log('isMobile device: ', isMobile);
 
-// stun server
-const server = {
-    iceServer: [{
-        urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302']
-    }]
+// get server configurations from django
+let iceServers = async () => {
+    await fetch('/turn_server/', {
+        method: 'GET',
+    })
+    .then(response => response.json()
+    )
+    .then(ser => {
+        twilioServers = ser.servers
+        const server = {
+            iceServer: [...twilioServers, {urls:'stun:stun1.l.google.com:19302', url:'stun:stun2.l.google.com:19302'}]
+        }; 
+        console.log(server)
+        return server;
+    })
+    .catch( err => {
+        console.log('iceservers fetching error from twilio:', err)
+    });
 };
+
 
 // show camera switch button on mobile devices
 if (isMobile) {
@@ -117,7 +133,7 @@ const getLocalMedia = async () => {
 
 
 const createUserConnection = () => {
-    userconnection = new RTCPeerConnection(server);
+    userconnection = new RTCPeerConnection(iceServers());
     console.log('RTC userconnection established.');
     
     startTime = window.performance.now();
