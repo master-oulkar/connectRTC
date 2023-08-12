@@ -1,0 +1,44 @@
+.getstarted{
+    background-color: $color-grey-light-2;
+    // grid-column: container-start / container-end;
+    padding: 5rem 20rem;
+    font-size: 2rem;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    row-gap: 3rem;
+
+    &__p{
+        font-size: 2.2rem;
+        padding-left: 10rem;
+        padding-right: 10rem;
+    }
+
+    &__buttons{
+        display: flex;
+        column-gap: 3rem;
+
+        @media only screen and (max-width:$bp-small){
+            flex-direction: column;
+            row-gap: 3rem;
+        }
+    }
+
+    @media only screen and (max-width:$bp-largest){
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+    @media only screen and (max-width:$bp-medium){
+        padding-left: 2rem;
+        padding-right: 2rem;
+
+        p{
+            padding-left: 5rem;
+            padding-right: 5rem;
+        }
+    }
+}
