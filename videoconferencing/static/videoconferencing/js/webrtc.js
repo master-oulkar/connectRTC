@@ -112,6 +112,7 @@ signaling_connection.onmessage = e => {
             if (uid === data.message.uid) {
                 return;
             } else {
+                document.getElementById('remote-username').innerHTML = data.message.username;
                 addAnswer(data.message.answer);
             };
             break;
@@ -262,6 +263,7 @@ const sendUserAnswer = async (offer) => {
         'uid': uid,
         'type': 'answer',
         'answer': answer,
+        'username': localUsername,
     }));
 };
 
