@@ -535,8 +535,8 @@ body {
   @media only screen and (max-width: 37.5em) {
     /* line 36, videoconferencing/static/videoconferencing/scss/_signup.scss */
     .signup__input {
-      font-size: 1rem;
-      padding: 0.4rem 1rem; } }
+      font-size: 1.2rem;
+      padding: 1rem 2rem; } }
   /* line 84, videoconferencing/static/videoconferencing/scss/_signup.scss */
   .signup__background {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), black);
@@ -624,7 +624,7 @@ body {
     /* line 36, videoconferencing/static/videoconferencing/scss/_login.scss */
     .login__input {
       font-size: 1rem;
-      padding: 0.3rem 1rem; } }
+      padding: 1rem 2rem; } }
   /* line 84, videoconferencing/static/videoconferencing/scss/_login.scss */
   .login__background {
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), black);
