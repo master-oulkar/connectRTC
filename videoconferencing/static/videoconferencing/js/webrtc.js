@@ -79,7 +79,7 @@ if (isMobile) {
 
 
 // websocket 
-signaling_connection = new WebSocket('ws://' + window.location.host + '/ws/videocall/' + channel_name + '/')
+signaling_connection = new WebSocket('wss://' + window.location.host + '/ws/videocall/' + channel_name + '/')
 
 signaling_connection.onopen = (e) => {
     console.log('websocket connection established.')
