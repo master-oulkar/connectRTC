@@ -12,9 +12,9 @@ const channel_name = document.querySelector('#channel-name').innerHTML;
 const localUsername = document.querySelector('#username').innerHTML;
 
 
-window.addEventListener("load", function(){
+window.addEventListener("load", function () {
     setTimeout(
-        function open(event){
+        function open(event) {
             document.querySelector(".popup").style.display = "block";
         },
         1000
@@ -79,7 +79,7 @@ if (isMobile) {
 
 
 // websocket 
-signaling_connection = new WebSocket('wss://' + window.location.host + '/ws/videocall/' + channel_name + '/')
+signaling_connection = new WebSocket('ws://' + window.location.host + '/ws/videocall/' + channel_name + '/')
 
 signaling_connection.onopen = (e) => {
     console.log('websocket connection established.')
@@ -166,7 +166,7 @@ startLocalVideoButton.addEventListener('click', async () => {
     signaling_connection.send(JSON.stringify({ 'type': 'ready', 'uid': uid }));
 });
 
-document.getElementById('video-call-end').addEventListener('click', ()=>{window.open('/videocall/', '_self')});
+document.getElementById('video-call-end').addEventListener('click', () => { window.open('/videocall/', '_self') });
 
 const createUserConnection = () => {
     userconnection = new RTCPeerConnection(iceServers());
@@ -214,9 +214,6 @@ const createUserConnection = () => {
             const videocalremote_gif = document.querySelector('.videocal-remote_gif');
             videocalremote_gif.style.display = 'none';
         } else if (userconnection.connectionState === 'connecting') {
-            // from pc to mobile browser iceccandidate state remains as connecting
-            // dont get confuse, connecting state comes fist , connected state is last 
-            // this code is added while debugging this issue 
             console.log('remote user connecting.')
         } else {
             console.log('remote user disconnected.')
@@ -258,7 +255,7 @@ const sendUserAnswer = async (offer) => {
     const answer = await remoteuser.createAnswer();
 
     await remoteuser.setLocalDescription(answer);
-
+    console.log('Answer send to remote')
     signaling_connection.send(JSON.stringify({
         'uid': uid,
         'type': 'answer',
@@ -383,6 +380,13 @@ const switchCamera = async (cameraActive) => {
             sender.replaceTrack(frontCameraStream.getVideoTracks()[0]);
         };
 
+        const audio_sender = senders.find((sender) =>
+            sender.track.kind === frontCameraStream.getAudioTracks()[0].kind);
+
+        if (audio_sender) {
+            audio_sender.replaceTrack(frontCameraStream.getAudioTracks()[0]);
+        };
+
         const localVideo = document.querySelector('#localuser');
         localVideo.srcObject = frontCameraStream;
         store.setCameraActive(!cameraActive);
@@ -404,19 +408,26 @@ const switchCamera = async (cameraActive) => {
             let localUser = userconnection;
             const senders = localUser.getSenders();
             console.log('senders:', senders);
-            const sender = senders.find((sender) =>
+            const video_sender = senders.find((sender) =>
                 sender.track.kind === backCameraStream.getVideoTracks()[0].kind);
-            console.log('sender:', sender);
-            if (sender) {
-                sender.replaceTrack(backCameraStream.getVideoTracks()[0]);
-                console.log('replaced video:', sender)
+
+            if (video_sender) {
+                video_sender.replaceTrack(backCameraStream.getVideoTracks()[0]);
             };
+
+            const audio_sender = senders.find((sender) =>
+                sender.track.kind === backCameraStream.getAudioTracks()[0].kind);
+
+            if (audio_sender) {
+                audio_sender.replaceTrack(backCameraStream.getAudioTracks()[0]);
+            };
+
             const localVideo = document.querySelector('#localuser');
             localVideo.srcObject = backCameraStream;
             store.setCameraActive(!cameraActive);
             updateMobileCameraButton(!cameraActive); //this button hase same styling as screen sharing, this function just change color to red button.
         } catch (error) {
-            console.log('error camera switching:', error)
+            console.log('error camera switching:', error);
         }
     }
 };
@@ -429,7 +440,7 @@ hangupButton.addEventListener('click', () => {
 
     console.log('send request to peer for hangup')
 
-    if(userconnection){
+    if (userconnection) {
         userconnection.close();
     };
 

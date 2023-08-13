@@ -25,6 +25,13 @@ const updateCameraButton = (cameraActive) => {
 const micButton = document.getElementById('mic_button');
 micButton.addEventListener('click', () => {
     const localStream = store.getState().localStream;
+
+    if (store.getState().backCameraStream){
+        const backCameraStream = store.getState().backCameraStream;
+        const micEnabled = backCameraStream.getAudioTracks()[0].enabled;
+        backCameraStream.getAudioTracks()[0].enabled = !micEnabled;
+    };
+
     const micEnabled = localStream.getAudioTracks()[0].enabled;
     localStream.getAudioTracks()[0].enabled = !micEnabled;
     updateMicButton(micEnabled);
