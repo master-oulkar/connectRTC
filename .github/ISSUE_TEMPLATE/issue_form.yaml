@@ -1,6 +1,6 @@
 name: Issue Report
 description: File an issue
-title: "[Bug]: "
+title: "issue name"
 labels: ["issue", "triage"]
 projects: ["connectRTC"]
 assignees:
@@ -13,7 +13,7 @@ body:
   - type: textarea
     id: what-issue
     attributes:
-      label: What is a issue is about?
+      label: What is a issue about?
       description: Also tell us, what did you expect to happen?
       placeholder: Tell us what you see!
       value: "An issue happened!"
