@@ -1,7 +1,7 @@
 name: Issue Report
 description: File an issue
 title: "issue name"
-labels: ["issue", "triage"]
+labels: ["new issue", "triage"]
 projects: ["connectRTC"]
 assignees:
   -
