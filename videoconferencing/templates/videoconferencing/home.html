@@ -22,6 +22,7 @@
                 {% if user.is_authenticated %}
                 <div class="button-container--sub">
                     <button class="btn" onclick="location.href={% url 'channel' %}">Start Video Call</button>
+<!--                     check logout is post request  -->
                     <button class="btn" onclick="location.href={% url 'signout' %}">Logout</button>
                 </div>
                 {% endif %}
