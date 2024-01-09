@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'videoconferencing',
+    'videoconferencing.apps.',
+    'videoconferencing.apps.VideoconferencingConfig',
 ]
 
 MIDDLEWARE = [
