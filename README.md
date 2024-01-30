@@ -2,13 +2,12 @@
 
 ## Table of Contents
 
-- [LIVE DEMO](#Live-Demo-link) 
+- [LIVE DEMO](#Live-Demo-link)
 - [webvc live](https://youtu.be/Xinb9Fql5qA) (watch demo video on the youtube)
 - [Project overview](#Project-overview)
 - [Technology](#Technology)
 - [Key Features](#Key-Features)
 - [How to run application locally ?](#How-to-run-application-?)
-
 
 <div id="Live-Demo-link"/>
 
@@ -17,6 +16,7 @@
 <div id="Project-overview"/>
 
 ### Project overview:
+
 This project is a web video calling application that utilizes the WebRTC to enable real-time video communication between users. The application incorporates essential features such as user signup, forget password capability, password matching functionality for the signup page, and additional controls for the video call experience, including mic mute/unmute, camera mute/unmute, and end call functionality.
 
 The application aims to provide a seamless and intuitive user experience for web-based video calling, with added functionality for user management and call control. By leveraging the Agora RTC SDK, it ensures reliable and efficient real-time communication between participants.
@@ -24,15 +24,17 @@ The application aims to provide a seamless and intuitive user experience for web
 <div id="Technology"/>
 
 ### Technology:
+
 1. WebRTC
 2. Python (Django)
 3. Database (PostgreSQL)
-4. HTML, JavaScript, CSS, Bootstrap 
+4. HTML, JavaScript, CSS, Bootstrap
 5. Hosted on render
 
 <div id="Key-Features"/>
 
 ### Key Features:
+
 1. **Video Calling:** The application allows users to initiate video calls with other participants in real time. It leverages the Agora RTC SDK to establish reliable and high-quality video communication.
 
 2. **User Signup:** Users can create new accounts by registering their credentials, including username, email address, and password. The signup process ensures password matching functionality to validate accurate password input.
@@ -50,44 +52,43 @@ The application aims to provide a seamless and intuitive user experience for web
 <div id="How-to-run-application-?"/>
 
 ### How to run application locally ?
+
 #### 1 - Clone repo
+
 ```
  git clone https://github.com/ShubhamOulkar/connectRTC.git
 ```
+
 #### 2 - Create/activate virtual environment in your current directory
 
 #### 3 - Install requirements
+
 ```
 pip install -r requirements.txt
 ```
+
 #### 4 - change directory to mainfolders
+
 ```
 cd mainfolders
 ```
-#### 5 - User text editor to update following code
-1. open **mainfolders/webvc/views.py** file and add appId and appCertificate from agora.
-    **[How to get appID and appCertificate](https://docs.agora.io/en/voice-calling/reference/manage-agora-account?platform=web)**
-![](mainfolders/webvc/static/webvc/images/appId.png)
 
-2. open **mainfolders/webvc/static/webvc/js/strems.js** add APP_ID here as well.
-```
-const APP_ID = '**************'
-const CHANNEL = sessionStorage.getItem('room')
-const TOKEN = sessionStorage.getItem('token')...
-```
-3. open **mainfolders/mainfolder/settings.py** add EMAIL_HOST_USER(add user gmail) and EMAIL_HOST_PASSWORD.
+#### 5 - open **mainfolders/mainfolder/settings.py** add EMAIL_HOST_USER(add user gmail) and EMAIL_HOST_PASSWORD.
+
     if you are using gmail then see [how to get gmail app password.](https://www.getmailbird.com/gmail-app-password/)
-![](mainfolders/webvc/static/webvc/images/email.png)
 
 #### 6 - run following commands in terminal
+
 ```
 python manage.py makemigrations
 ```
+
 ```
 python manage.py migrate
 ```
 
 #### 7 - Start server
+
 ```
 python manage.py runserver
 ```
@@ -95,7 +96,7 @@ python manage.py runserver
 <div id="license"/>
 
 ### License
+
 This project is licensed under the [Apache License.](LICENSE)
 
 Feel free to customize the content and structure of the [README.md](README.md) file according to your specific project requirements and information.
-
