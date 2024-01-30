@@ -1,6 +1,8 @@
-## This file guide you to review PR
+## This file guide you to review PR from another fork branch.
 
-### Method 1 : GitHub CLI Command
+#### To push changes to fork branch you should have access to push/write of central repository.
+
+### Method 1 : GitHub CLI Command ()
 
 #### Step 1 : Make sure your local system is installed with GitHub CLI
 
