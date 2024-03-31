@@ -16,9 +16,10 @@
     <!-- <meta http-equiv="content-security-policy" content="default-src http:" /> -->
     <!-- setting for bots index site and follow links from a site -->
     <meta name="robots" content="index, follow" />
-    <!--     open graph media card -->
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="Video calling Web App" />
+    <!-- og cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="connectRTC" />
+    <meta property="og:title" content="connectRTC" /
     <meta
       property="og:description"
       content="Build video calling app with django framework and WEBRTC"
@@ -26,7 +27,7 @@
     <meta property="og:url" content="https://connect-rtc.onrender.com/" />
     <meta
       property="og:image"
-      content="https://connect-rtc.onrender.com/static/videoconferencing/img/icon.png"
+      content="https://connect-rtc.onrender.com/static/videoconferencing/img/icon-X.png"
     />
     <meta
       property="og:image:alt"
@@ -44,7 +45,7 @@
       name="twitter:url"
       content="https://connect-rtc.onrender.com"
     />
-    <meta name="twitter:image:src" content="https://connect-rtc.onrender.com/static/videoconferencing/img/icon.png" />
+    <meta name="twitter:image:src" content="https://connect-rtc.onrender.com/static/videoconferencing/img/icon-X.png" />
     <meta name="twitter:image:alt" content="connectRTC logo" />
     <meta name="twitter:creator" content="@shubhuoulkar" />
 
@@ -78,14 +79,12 @@
     ></script>
 
     <title>Connect with RTC</title>
+
+    <!-- login and signup js -->
+    <script defer src="{% static 'videoconferencing/js/signup.js' %}"></script>
   </head>
 
   <body>
     {% block content %} {% endblock content%}
   </body>
-  <!-- login and signup js -->
-  <script
-    type="text/javascript"
-    src="{% static 'videoconferencing/js/signup.js' %}"
-  ></script>
 </html>
