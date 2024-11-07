@@ -19,7 +19,7 @@
 
 This project is a web video calling application that utilizes the WebRTC to enable real-time video communication between users. The application incorporates essential features such as user signup, forget password capability, password matching functionality for the signup page, and additional controls for the video call experience, including mic mute/unmute, camera mute/unmute, and end call functionality.
 
-The application aims to provide a seamless and intuitive user experience for web-based video calling, with added functionality for user management and call control. By leveraging the Agora RTC SDK, it ensures reliable and efficient real-time communication between participants.
+The application aims to provide a seamless and intuitive user experience for web-based video calling, with added functionality for user management and call control. 
 
 <div id="Technology"/>
 
