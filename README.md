@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [LIVE DEMO](#Live-Demo-link)
+- [Project Deployed link](#Live-Demo-link)
 - [webvc live](https://youtu.be/Xinb9Fql5qA) (watch demo video on the youtube)
 - [Project overview](#Project-overview)
 - [Technology](#Technology)
@@ -11,7 +11,7 @@
 
 <div id="Live-Demo-link"/>
 
-### [Live Demo link](https://connect-rtc.onrender.com/)
+### [connectRTC deployed link](https://connect-rtc.onrender.com/)
 
 <div id="Project-overview"/>
 
@@ -19,7 +19,7 @@
 
 This project is a web video calling application that utilizes the WebRTC to enable real-time video communication between users. The application incorporates essential features such as user signup, forget password capability, password matching functionality for the signup page, and additional controls for the video call experience, including mic mute/unmute, camera mute/unmute, and end call functionality.
 
-The application aims to provide a seamless and intuitive user experience for web-based video calling, with added functionality for user management and call control. By leveraging the Agora RTC SDK, it ensures reliable and efficient real-time communication between participants.
+The application aims to provide a seamless and intuitive user experience for web-based video calling, with added functionality for user management and call control. 
 
 <div id="Technology"/>
 
@@ -95,8 +95,11 @@ python manage.py runserver
 
 <div id="license"/>
 
+#### Planned Development
+     1. Design React front end
+     2. Implementing OAuth 
+     3. integratingtest driven development
+
 ### License
 
 This project is licensed under the [Apache License.](LICENSE)
-
-Feel free to customize the content and structure of the [README.md](README.md) file according to your specific project requirements and information.
