@@ -95,8 +95,11 @@ python manage.py runserver
 
 <div id="license"/>
 
+#### Planned Development
+     1. Design React front end
+     2. Implementing OAuth 
+     3. integratingtest driven development
+
 ### License
 
 This project is licensed under the [Apache License.](LICENSE)
-
-Feel free to customize the content and structure of the [README.md](README.md) file according to your specific project requirements and information.
