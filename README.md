@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [LIVE DEMO](#Live-Demo-link)
+- [Project Deployed link](#Live-Demo-link)
 - [webvc live](https://youtu.be/Xinb9Fql5qA) (watch demo video on the youtube)
 - [Project overview](#Project-overview)
 - [Technology](#Technology)
@@ -11,7 +11,7 @@
 
 <div id="Live-Demo-link"/>
 
-### [Live Demo link](https://connect-rtc.onrender.com/)
+### [connectRTC deployed link](https://connect-rtc.onrender.com/)
 
 <div id="Project-overview"/>
 
