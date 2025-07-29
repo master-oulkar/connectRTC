@@ -1,3 +1,3 @@
 # connectRTC
 
-[website link](https://connect-rtc.onrender.com/)
+[demo link](https://connect-rtc.onrender.com/)
