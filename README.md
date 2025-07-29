@@ -11,7 +11,7 @@
 
 <div id="Live-Demo-link"/>
 
-### [connectRTC deployed link](https://connect-rtc.onrender.com/)
+[connectRTC demo link](https://connect-rtc.onrender.com/)
 
 <div id="Project-overview"/>
 
@@ -75,7 +75,7 @@ cd mainfolders
 
 #### 5 - open **mainfolders/mainfolder/settings.py** add EMAIL_HOST_USER(add user gmail) and EMAIL_HOST_PASSWORD.
 
-    if you are using gmail then see [how to get gmail app password.](https://www.getmailbird.com/gmail-app-password/)
+if you are using gmail then see [how to get gmail app password.](https://www.getmailbird.com/gmail-app-password/)
 
 #### 6 - run following commands in terminal
 
@@ -98,7 +98,7 @@ python manage.py runserver
 #### Planned Development
      1. Design React front end
      2. Implementing OAuth 
-     3. integratingtest driven development
+     3. Test driven development
 
 ### License
 
