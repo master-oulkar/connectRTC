@@ -1,32 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        {% load static %}
-        {% load compress %}
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        <!-- icon link -->
-        <link rel="shortcut icon" href="{% static 'videoconferencing/img/icon.ico' %}" type="image/x-icon">
-    
-        <!-- custom scss file link -->
-        <link rel="stylesheet"  href="{% static 'videoconferencing/css/main.f2b6eb97bd60.css'%}" />
-<!--         {% compress css %}
+<html lang="en-IN">
+  <head>
+    {% load static %} {% load compress %}
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=1"
+    />
+    <meta name="author" content="shubham oulkar" />
+    <meta
+      name="description"
+      content="Video calling web app using WEBRTC, Django and JavaScript."
+    />
+    <!-- pragma directive for content security policy -->
+    <!-- <meta http-equiv="content-security-policy" content="default-src http:" /> -->
+    <!-- setting for bots index site and follow links from a site -->
+    <meta name="robots" content="index, follow" />
+    <!-- og cards -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="connectRTC" />
+    <meta property="og:title" content="connectRTC" /
+    <meta
+      property="og:description"
+      content="Build video calling app with django framework and WEBRTC"
+    />
+    <meta property="og:url" content="https://connect-rtc.onrender.com/" />
+    <meta
+      property="og:image"
+      content="https://connect-rtc.onrender.com/static/videoconferencing/img/icon-X.png"
+    />
+    <meta
+      property="og:image:alt"
+      content="connectRTC logo"
+    />
+    <!-- X media cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@shubhuoulkar" />
+    <meta name="twitter:title" content="Video calling Web App" />
+    <meta
+      name="twitter:description"
+      content="Build video calling app with django framework and WEBRTC"
+    />
+    <meta
+      name="twitter:url"
+      content="https://connect-rtc.onrender.com"
+    />
+    <meta name="twitter:image:src" content="https://connect-rtc.onrender.com/static/videoconferencing/img/icon-X.png" />
+    <meta name="twitter:image:alt" content="connectRTC logo" />
+    <meta name="twitter:creator" content="@shubhuoulkar" />
+
+    <!-- web app capable -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <!--  -->
+    <meta name="apple-mobile-web-app-title" content="connectRTC" />
+    <meta name="application-name" content="connectRTC" />
+
+    <!-- icon link -->
+    <link
+      rel="shortcut icon"
+      href="{% static 'videoconferencing/img/icon.ico' %}"
+      type="image/x-icon"
+    />
+
+    <!-- custom scss file link -->
+    <link
+      rel="stylesheet"
+      href="{% static 'videoconferencing/css/main.f2b6eb97bd60.css'%}"
+    />
+    <!--         {% compress css %}
         <link rel="stylesheet" type="text/x-scss" href="{% static 'videoconferencing/scss/main.scss'%}" />
         {% endcompress %}
  -->
-        <!-- font osm link -->
-        <script src="https://kit.fontawesome.com/91f31f2ff1.js" crossorigin="anonymous"></script>
-    
-        <title>Connect with RTC</title>
-    </head>
-    
-<body>
-    {% block content %}
+    <!-- font osm link -->
+    <script
+      src="https://kit.fontawesome.com/91f31f2ff1.js"
+      crossorigin="anonymous"
+    ></script>
 
-    {% endblock content%}
-</body>
-<!-- login and signup js -->
-<script type="text/javascript" src="{% static 'videoconferencing/js/signup.js' %}"></script>
+    <title>Connect with RTC</title>
 
+    <!-- login and signup js -->
+    <script defer src="{% static 'videoconferencing/js/signup.js' %}"></script>
+  </head>
+
+  <body>
+    {% block content %} {% endblock content%}
+  </body>
 </html>

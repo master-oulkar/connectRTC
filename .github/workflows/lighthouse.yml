@@ -1,0 +1,125 @@
+name: Lighthouse audit
+
+on:
+  pull_request_target:
+    types: [opened, synchronize]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  lighthouse:
+    if: github.actor != 'dependabot[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch with push permissions
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          persist-credentials: true
+
+      - name: Set live site URL
+        run: |
+          PREVIEW_URL="https://connect-rtc.onrender.com"
+          echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
+
+      - name: Run Lighthouse audits
+        run: |
+          URLS=(
+            "$PREVIEW_URL"
+          )
+
+          echo "## 🚦 Lighthouse Results (Mobile & Desktop)" > lighthouse-report.md
+          echo "| URL | Device | Perf | A11y | Best Practices | SEO |" >> lighthouse-report.md
+          echo "| --- | ------ | ---- | ---- | -------------- | --- |" >> lighthouse-report.md
+
+          for device in mobile desktop; do
+            for url in "${URLS[@]}"; do  
+              if [ "$device" = "desktop" ]; then
+                lighthouse_args="--preset=desktop"
+              else
+                lighthouse_args="--form-factor=mobile"
+              fi
+
+              npx --yes lighthouse "$url" \
+                $lighthouse_args \
+                --output json \
+                --output-path="lighthouse-report-${device}.json" \
+                --chrome-flags="--headless"
+
+              report="lighthouse-report-${device}.json"
+              perf=$(jq '.categories | .performance.score * 100' $report)
+              a11y=$(jq '.categories | .accessibility.score * 100' $report)
+              bp=$(jq '.categories | .["best-practices"].score * 100' $report)
+              seo=$(jq '.categories | .seo.score * 100' $report)
+
+              stoplight() {
+                if (( $(echo "$1 >= 90" | bc -l) )); then echo "🟢"; 
+                elif (( $(echo "$1 >= 75" | bc -l) )); then echo "🟠"; 
+                else echo "🔴"; fi
+              }
+
+              perf_stoplight=$(stoplight $perf)
+              a11y_stoplight=$(stoplight $a11y)
+              bp_stoplight=$(stoplight $bp)
+              seo_stoplight=$(stoplight $seo)
+
+              path=$(echo "$url" | sed "s|$PREVIEW_URL||")
+              if [ -z "$path" ]; then path="/"; fi
+
+              echo "| $path | $device | $perf_stoplight $(printf "%.0f" $perf) | $a11y_stoplight $(printf "%.0f" $a11y) | $bp_stoplight $(printf "%.0f" $bp) | $seo_stoplight $(printf "%.0f" $seo) |" >> lighthouse-report.md
+            done
+          done
+
+      - name: Log Lighthouse report
+        run: cat lighthouse-report.md
+
+      - name: Commit lighthouse-report.md to repo
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add lighthouse-report.md
+          git commit -m "chore: update Lighthouse report [skip ci]" || echo "No changes to commit"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
+
+      - name: Comment on PR with Lighthouse results
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('lighthouse-report.md', 'utf8');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === "Bot" &&
+              comment.body.includes("🚦 Lighthouse Results")
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                comment_id: botComment.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: report,
+              });
+              console.log("Updated existing Lighthouse comment.");
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.payload.pull_request.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: report,
+              });
+              console.log("Created new Lighthouse comment.");
+            }
