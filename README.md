@@ -35,7 +35,7 @@ The application aims to provide a seamless and intuitive user experience for web
 
 ### Key Features:
 
-1. **Video Calling:** The application allows users to initiate video calls with other participants in real time. It leverages the Agora RTC SDK to establish reliable and high-quality video communication.
+1. **Video Calling:** The application allows users to initiate video calls with other participants in real time. It uses the WEBRTC api to establish reliable and high-quality video communication.
 
 2. **User Signup:** Users can create new accounts by registering their credentials, including username, email address, and password. The signup process ensures password matching functionality to validate accurate password input.
 
