@@ -20,14 +20,18 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
-      - name: Setup Node.js with npm cache
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.x'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm install lighthouse
+      - name: Wait for Netlify preview to be live
+        run: |
+          PREVIEW_URL="https://connect-rtc.onrender.com"
+          echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
+          for i in {1..2}; do
+            if curl -s --head "$PREVIEW_URL" | grep "200 OK" > /dev/null; then
+              echo "Preview is live!"
+              break
+            fi
+            echo "Waiting for Netlify to deploy... ($i/2)"
+            sleep 10
+          done
 
       - name: Run Lighthouse audits
         run: |
@@ -47,7 +51,7 @@ jobs:
                 lighthouse_args="--form-factor=mobile"
               fi
 
-              npx lighthouse "$url" \
+              npx --yes lighthouse "$url" \
                 $lighthouse_args \
                 --output json \
                 --output-path="lighthouse-report-${device}.json" \
@@ -94,7 +98,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
-            const report = fs.readFileSync('lighthouse-report.md', 'utf8');
+            const reportBody = fs.readFileSync('lighthouse-report.md', 'utf8');
+      
+            const finalComment = `<!-- lh-report -->\n${reportBody}`;
       
             const { data: comments } = await github.rest.issues.listComments({
               issue_number: context.payload.pull_request.number,
@@ -104,7 +110,7 @@ jobs:
       
             const botComment = comments.find(comment =>
               comment.user.type === 'Bot' &&
-              comment.body.includes('🚦Lighthouse Results (Mobile & Desktop)')
+              comment.body.includes('<!-- lh-report -->')
             );
       
             if (botComment) {
@@ -112,13 +118,13 @@ jobs:
                 comment_id: botComment.id,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: report
+                body: finalComment
               });
             } else {
               await github.rest.issues.createComment({
                 issue_number: context.payload.pull_request.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: report
+                body: finalComment
               });
             }
