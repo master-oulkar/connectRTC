@@ -41,7 +41,7 @@ jobs:
               if [ "$device" = "desktop" ]; then
                 lighthouse_args="--preset=desktop"
               else
-                lighthouse_args="--preset=mobile"
+                lighthouse_args="--form-factor=mobile"
               fi
 
               npx --yes lighthouse "$url" \
