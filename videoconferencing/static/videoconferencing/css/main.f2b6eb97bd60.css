@@ -280,7 +280,11 @@ body {
   /* line 20, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
   .getstarted__buttons {
     display: flex;
-    column-gap: 3rem; }
+    column-gap: 3rem;
+    > .btn {
+          background-color: #000000;
+          color: #ffffff;
+          opacity:0.65; }}
     @media only screen and (max-width: 37.5em) {
       /* line 20, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
       .getstarted__buttons {
