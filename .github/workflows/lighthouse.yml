@@ -98,7 +98,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
-            const report = fs.readFileSync('lighthouse-report.md', 'utf8');
+            const reportBody = fs.readFileSync('lighthouse-report.md', 'utf8');
+      
+            const finalComment = `<!-- lh-report -->\n${reportBody}`;
       
             const { data: comments } = await github.rest.issues.listComments({
               issue_number: context.payload.pull_request.number,
@@ -108,7 +110,7 @@ jobs:
       
             const botComment = comments.find(comment =>
               comment.user.type === 'Bot' &&
-              comment.body.includes('🚦Lighthouse Results (Mobile & Desktop)')
+              comment.body.includes('<!-- lh-report -->')
             );
       
             if (botComment) {
@@ -116,13 +118,13 @@ jobs:
                 comment_id: botComment.id,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: report
+                body: finalComment
               });
             } else {
               await github.rest.issues.createComment({
                 issue_number: context.payload.pull_request.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: report
+                body: finalComment
               });
             }
