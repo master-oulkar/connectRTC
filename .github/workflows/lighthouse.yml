@@ -110,6 +110,7 @@ jobs:
                 repo: context.repo.repo,
                 body: report,
               });
+              console.log("Updated existing Lighthouse comment.");
             } else {
               await github.rest.issues.createComment({
                 issue_number: context.payload.pull_request.number,
@@ -117,4 +118,5 @@ jobs:
                 repo: context.repo.repo,
                 body: report,
               });
+              console.log("Created new Lighthouse comment.");
             }
