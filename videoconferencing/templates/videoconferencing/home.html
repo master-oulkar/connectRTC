@@ -12,12 +12,20 @@
                 {% if messages %}
                 <ul class="text-danger">
                     {% for message in messages %}
-                    <p {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}
+                <div>
+                    <p class="text-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" xml:space="preserve" width="16" height="16">
+                        <path style="fill:#fff" d="M14.957 5.913v-1.043h-1.044V1.043h-1.043V0h-2.087v1.043h-1.043v1.044H7.652v1.043H2.087v1.043H1.043v1.044H0v3.826h1.043v1.044h1.044v4.87h1.043V16h2.087v-1.043h1.043V11.13h1.391v1.043h2.087v1.044h1.043v1.043h2.087v-1.043h1.043V9.391h1.044V8.348H16v-2.435z"/><path style="fill:#c70024" d="M16 5.913h-1.043v-1.043h-2.087v4.522h2.087V8.348H16zM6.261 10.087h-1.391V3.13H2.087v1.043H1.043v1.044H0v3.826h1.043v1.044h1.044v4.87h1.043V16h2.087v-1.043h1.043z"/><path style="fill:#fff" d="M2.087 3.13v1.043H1.043v1.044H0v1.043h2.087v-1.043h1.043v-2.087z"/><path d="M13.913 5.913h1.044v-1.043h-1.044V1.043h-1.043v12.174h1.043V9.391h1.044V8.348h-1.044zM10.783 0h2.087v1.043h-2.087zm0 13.217h2.087v1.043h-2.087zM7.652 2.087h2.087v1.043H7.652zm0 9.043h2.087v1.043H7.652zm-2.783 -1.043V4.174h2.783v-1.043H2.087v1.043h1.739v5.913H2.087v4.87h1.043V11.13h2.087v3.826h1.043V11.13h1.391v-1.043zM0 5.217h1.043v3.826H0zM9.739 1.043h1.043v1.043h-1.043zm0 11.13h1.043v1.043h-1.043z"/><path d="M3.13 14.957h2.087V16h-2.087zM1.043 4.174h1.043v1.043H1.043zm0 4.87h1.043v1.043H1.043zm13.913 -3.13H16v2.435h-1.043z"/>
+                        </svg>
+                        New video calling AI updates are in development.
+                    </p>
+                </div>
             </div>
-            <h1 class="heading-1">Connect with RTC <sub><h4>Major updates are in development.</h4></sub></h1>
+            <h1 class="heading-1">Connect with RTC</h1>
             <div class="button-container">
                 {% if user.is_authenticated %}
                 <div class="button-container--sub">
@@ -47,7 +55,7 @@
     <section class="content">
 
         <div class="content__details">
-            <h3 class="heading-2">Video Calling That's Beyond Your Imagination</h3>
+            <h2 class="heading-2">Video Calling That's Beyond Your Imagination</h2>
             <p class="content__p">Experience seamless video calls with your colleagues and friends,
                 whether youre discussing business plans or catching up after work.
                 Unlock the full potential of video communication with our easy-to-use
@@ -81,7 +89,7 @@
         </picture>
 
         <div class="content__details content__details--shiftcontent">
-            <h3 class="heading-2">Share Your Screen Like a Pro</h3>
+            <h2 class="heading-2">Share Your Screen Like a Pro</h2>
             <p class="content__p">Showcase your ideas and presentations with our intuitive screen
                 sharing feature. Collaborate effectively and keep everyone on
                 the same page - the possibilities are endless!
@@ -89,7 +97,7 @@
         </div>
 
         <div class="content__details">
-            <h3 class="heading-2">Universal application for video calling</h3>
+            <h2 class="heading-2">Universal application for video calling</h2>
             <p class="content__p">Connect with RTC and become more professional in the industry.
                 Use single application to use on all devices like
                 Mobile, tablets, desktops.
@@ -114,7 +122,7 @@
 
     <!-- get start section -->
     <section class="getstarted">
-        <h4 class="heading-3">Get Started</h4>
+        <h3 class="heading-3">Get Started</h3>
         <p class="getstarted__p">Are you ready to revolutionize your video calling experience?
             Register today and embark on a communication journey
             that’s worlds away from ordinary.
@@ -135,24 +143,24 @@
 
     <!-- common queries section -->
     <section class="queries">
-        <h4 class="heading-3">Common Queries</h4>
+        <h3 class="heading-3">Common Queries</h3>
         <div class="queries__list">
             <div>
-                <h5 class="queries__list-q heading-4">How do I create a room?</h5>
+                <h4 class="queries__list-q heading-4">How do I create a room?</h4>
                 <p class="queries__list-ans">
                     Simply put room name and 'Start a Call'. You can share room name
                     with your intended participants.
                 </p>
             </div>
             <div>
-                <h5 class="queries__list-q heading-4">Can I mute my mic?</h5>
+                <h4 class="queries__list-q heading-4">Can I mute my mic?</h4>
                 <p class="queries__list-ans">
                     Absolutely! Use the onscreen control panel to mute and
                     unmute your mic and camera with ease.
                 </p>
             </div>
             <div>
-                <h5 class="queries__list-q heading-4">Is screen sharing safe?</h5>
+                <h4 class="queries__list-q heading-4">Is screen sharing safe?</h4>
                 <p class="queries__list-ans">
                     Rest assured, our platform prioritizes privacy and security,
                     so you can share your screen without worry.
@@ -192,15 +200,9 @@
         </div>
         <div class="footer__copyright">
             <div class="footer__copyright-link">
-                <a href="https://twitter.com/shubhamoulkar" target="_blank" aria-label="follow shubham on x.com">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-twitter" viewBox="0 0 16 16">
-                        <path
-                            d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
-                    </svg></a>
-                <a href="https://bsky.app/profile/oulkarshubhu.bsky.social" target="_blank" aria-label="follow shubham on bluesky">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -3.268 64 68.414" height="20" width="20"><path fill="#0085ff" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805zm36.254 0C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745z"></path></svg>
-                   </a>
+                <a href="https://x.com/shubhuoulkar" target="_blank" aria-label="follow shubham on x.com">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#0000" width="20" height="20" viewBox="0 0 1200 1227"><path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"></path></svg>
+                </a>
                 <a href="https://github.com/ShubhamOulkar" target="_blank" aria-label="follow shubham on GitHub">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-github" viewBox="0 0 16 16">
@@ -213,6 +215,9 @@
                         <path
                             d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
                     </svg></a>
+                <a href="https://bsky.app/profile/oulkarshubhu.bsky.social" target="_blank" aria-label="follow shubham on bluesky">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -3.268 64 68.414" height="20" width="20"><path fill="#0085ff" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805zm36.254 0C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745z"></path></svg>
+                   </a>
             </div>
             <div class="footer__copy">
                 Copyright &copy; 2023-2025 connect-RTC
