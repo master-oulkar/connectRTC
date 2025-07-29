@@ -284,7 +284,11 @@ body {
     > .btn {
           background-color: #000000;
           color: #ffffff;
-          opacity:0.65; }}
+          opacity:0.65; 
+          .btn:hover {
+            background-color: inherit;
+            opacity: 0.2;
+          }}}
     @media only screen and (max-width: 37.5em) {
       /* line 20, videoconferencing/static/videoconferencing/scss/_getstarted.scss */
       .getstarted__buttons {
