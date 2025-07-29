@@ -1,5 +1,8 @@
 # connectRTC
 
+<!-- lighthouse-start -->
+<!-- lighthouse-end -->
+
 ## Table of Contents
 
 - [Project Deployed link](#Live-Demo-link)
