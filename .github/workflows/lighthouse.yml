@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize]
 
 permissions:
-  contents: read
+  contents: write
   pull-requests: write
 
 jobs:
@@ -14,13 +14,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout PR code
+      - name: Checkout PR branch with push permissions
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          persist-credentials: true
 
-      - name: Set live site URL (Render free tier does not provide preview)
+      - name: Set live site URL
         run: |
           PREVIEW_URL="https://connect-rtc.onrender.com"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
@@ -40,7 +41,7 @@ jobs:
               if [ "$device" = "desktop" ]; then
                 lighthouse_args="--preset=desktop"
               else
-                lighthouse_args="--form-factor=mobile"
+                lighthouse_args="--preset=mobile"
               fi
 
               npx --yes lighthouse "$url" \
@@ -76,11 +77,15 @@ jobs:
       - name: Log Lighthouse report
         run: cat lighthouse-report.md
 
-      - name: Upload Lighthouse report
-        uses: actions/upload-artifact@v4
-        with:
-          name: lighthouse-reports
-          path: lighthouse-report.md
+      - name: Commit lighthouse-report.md to repo
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add lighthouse-report.md
+          git commit -m "chore: update Lighthouse report [skip ci]" || echo "No changes to commit"
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
 
       - name: Comment on PR with Lighthouse results
         uses: actions/github-script@v7
@@ -118,27 +123,3 @@ jobs:
               });
               console.log("Created new Lighthouse comment.");
             }
-
-      - name: Replace Lighthouse section in README.md
-        if: github.event.pull_request.head.repo.full_name == github.repository
-        run: |
-          report_content=$(<lighthouse-report.md)
-
-          awk -v report="$report_content" '
-            BEGIN { start=0 }
-            /<!-- lighthouse-start -->/ {
-              print; print report; start=1; next
-            }
-            /<!-- lighthouse-end -->/ { start=0; print; next }
-            start==0 { print }
-          ' README.md > temp.md && mv temp.md README.md
-
-      - name: Commit and push updated README.md
-        if: github.event.pull_request.head.repo.full_name == github.repository
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          
-          git add README.md
-          git commit -m "docs(readme): update Lighthouse report section [skip ci]" || echo "No changes to commit"
-          git push origin HEAD:${{ github.event.pull_request.head.ref }}
