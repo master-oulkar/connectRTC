@@ -21,7 +21,7 @@ jobs:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           persist-credentials: true
 
-      - name: Set live site URL
+      - name: Set live site URL (render do not provide preview for free)
         run: |
           PREVIEW_URL="https://connect-rtc.onrender.com"
           echo "PREVIEW_URL=$PREVIEW_URL" >> "$GITHUB_ENV"
