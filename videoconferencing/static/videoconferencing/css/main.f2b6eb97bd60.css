@@ -86,6 +86,9 @@ body {
       .footer__features--list a:hover, .footer__features--list a:active, .footer__support--list a:hover, .footer__support--list a:active, .footer__legal--list a:hover, .footer__legal--list a:active {
         color: #f9f7f6; }
   /* line 53, videoconferencing/static/videoconferencing/scss/_footer.scss */
+  .footer__copyright-link {
+    display: flex;
+    gap: 1rem; }
   .footer__copyright {
     display: flex;
     flex-direction: column;
