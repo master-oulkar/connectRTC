@@ -1,8 +1,5 @@
 # connectRTC
 
-<!-- lighthouse-start -->
-<!-- lighthouse-end -->
-
 ## Table of Contents
 
 - [Project Deployed link](#Live-Demo-link)
@@ -11,6 +8,7 @@
 - [Technology](#Technology)
 - [Key Features](#Key-Features)
 - [How to run application locally ?](#How-to-run-application-?)
+- [Light house report](lighthouse-report.md)
 
 <div id="Live-Demo-link"/>
 
